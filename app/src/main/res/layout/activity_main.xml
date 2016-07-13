@@ -10,7 +10,22 @@
     tools:context="com.neosystems.logishubmobile50.MainActivity">
 
     <TextView
+        android:id="@+id/tvIsConnected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_gravity="center_horizontal"
+        android:background="#FF0000"
+        android:textColor="#FFF"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:text="연결" />
+
+    <EditText
+        android:id="@+id/etResponse"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:inputType="textMultiLine" />
+
 </RelativeLayout>
