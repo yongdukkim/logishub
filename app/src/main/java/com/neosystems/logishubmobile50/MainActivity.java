@@ -9,8 +9,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        System.out.println("Commit Test");
-        System.out.println("Commit Test to GIT remote");
+        System.out.println("We are going to use GIT as a version control system.");
+
 
 
     }
