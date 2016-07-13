@@ -1,7 +1,5 @@
 package com.neosystems.logishubmobile50;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
@@ -10,13 +8,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.neosystems.logishubmobile50.Common.Define;
@@ -79,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
     }
-
 
     protected void onResume() {
         super.onResume();
