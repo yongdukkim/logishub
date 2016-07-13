@@ -8,14 +8,22 @@ import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.app.Activity;
+import android.content.SharedPreferences;
 
 import com.neosystems.logishubmobile50.Common.Define;
+import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 
 public class MainActivity extends Activity {
     public static EditText etResponse;
     public static TextView tvIsConnected;
     public static Context context;
+    private static MainActivity instance;
+
+    public static MainActivity getInstance(){
+        return instance;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,9 @@ public class MainActivity extends Activity {
         if(isConnected()) {
             tvIsConnected.setText("연결");
             new VehicleOperationTask().execute(Define.LOGISHUBURL + Define.VEHICLEORPERATION);
+
+            GeoLocationHandler.initialize();
+            GeoLocationHandler.getInstance().start();
         }
         else {
             tvIsConnected.setText("연결실패");
@@ -44,6 +55,11 @@ public class MainActivity extends Activity {
     }
 
     protected  void onDestroy() {
+        if (GeoLocationHandler.getInstance() != null) {
+            GeoLocationHandler.getInstance().stop();
+            GeoLocationHandler.getInstance().clearListeners();
+        }
+
         super.onDestroy();
     }
 
