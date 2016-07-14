@@ -184,36 +184,26 @@ public class GeoLocationFinder {
 
     protected boolean isBetterLocation(Location location, Location currentBestLocation) {
         if (currentBestLocation == null) {
-            // A new location is always better than no location
             return true;
         }
 
-        // Check whether the new location fix is newer or older
         long timeDelta = location.getTime() - currentBestLocation.getTime();
         boolean isSignificantlyNewer = timeDelta > WAITING_TIME;
         boolean isSignificantlyOlder = timeDelta < -WAITING_TIME;
         boolean isNewer = timeDelta > 0;
 
-        // If it's been more than two minutes since the current location, use the new location
-        // because the user has likely moved
         if (isSignificantlyNewer) {
             return true;
-            // If the new location is more than two minutes older, it must be worse
         } else if (isSignificantlyOlder) {
             return false;
         }
 
-        // Check whether the new location fix is more or less accurate
         int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
         boolean isLessAccurate = accuracyDelta > 0;
         boolean isMoreAccurate = accuracyDelta < 0;
         boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+        boolean isFromSameProvider = isSameProvider(location.getProvider(), currentBestLocation.getProvider());
 
-        // Check if the old and new location are from the same provider
-        boolean isFromSameProvider = isSameProvider(location.getProvider(),
-                currentBestLocation.getProvider());
-
-        // Determine location quality using a combination of timeliness and accuracy
         if (isMoreAccurate) {
             return true;
         } else if (isNewer && !isLessAccurate) {
