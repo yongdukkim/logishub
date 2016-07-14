@@ -24,12 +24,6 @@ public class MainActivity extends AppCompatActivity {
     public static EditText etResponse;
     public static TextView tvIsConnected;
     public static Context context;
-    private static MainActivity instance;
-    public ActionBar actionBar;
-
-    public static MainActivity getInstance(){
-        return instance;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
         etResponse.setFocusable(false);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
 
-        //위치전송
-        GeoLocationHandler.initialize();
-        GeoLocationHandler.getInstance().start();
-
         if(isConnected()) {
             tvIsConnected.setText("연결");
             new VehicleOperationTask().execute(Define.LOGISHUBURL + Define.VEHICLEORPERATION);
@@ -53,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         else {
             tvIsConnected.setText("연결실패");
         }
+
+        //위치전송
+        GeoLocationHandler.initialize();
+        GeoLocationHandler.getInstance().start();
     }
 
     protected void setActionbar() {
