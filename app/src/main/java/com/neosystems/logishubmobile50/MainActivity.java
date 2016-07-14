@@ -42,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         etResponse.setFocusable(false);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
 
+        //위치전송
+        GeoLocationHandler.initialize();
+        GeoLocationHandler.getInstance().start();
+
         if(isConnected()) {
             tvIsConnected.setText("연결");
             new VehicleOperationTask().execute(Define.LOGISHUBURL + Define.VEHICLEORPERATION);
-
-            GeoLocationHandler.initialize();
-            GeoLocationHandler.getInstance().start();
         }
         else {
             tvIsConnected.setText("연결실패");
