@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         if(isConnected()) {
             tvIsConnected.setText("연결");
             new VehicleOperationTask().execute(Define.LOGISHUBURL + Define.VEHICLEORPERATION);
