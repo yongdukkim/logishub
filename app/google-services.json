@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "520263243853",
+    "firebase_url": "https://fir-newlogishub.firebaseio.com",
+    "project_id": "firebase-newlogishub",
+    "storage_bucket": "firebase-newlogishub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520263243853:android:e0c924984988c245",
+        "android_client_info": {
+          "package_name": "com.neosystems.logishubmobile50"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520263243853-opif91ilputb7sf3m4iq85oo9mjasd90.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "520263243853-f2cb0tf5kpvomoejhfmf7af9b7eb20si.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdOt6-s8w6McmtQPquWcq7yfViefNXUyU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
