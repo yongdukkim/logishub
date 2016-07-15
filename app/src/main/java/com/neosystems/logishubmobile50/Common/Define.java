@@ -18,4 +18,8 @@ public class Define {
     public static final String GEO_UPDATE_DATE = "GeoUpdateTime";
     public static final String GEO_LOCATION_LOGGER_ENABLE = "EnableGeoLocationLogger";
     public static final String GEO_IS_READY_GPS = "GeoIsReadyGPS";
+
+    public static final String REGISTRATION_READY = "registrationReady";
+    public static final String REGISTRATION_GENERATING = "registrationGenerating";
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
 }

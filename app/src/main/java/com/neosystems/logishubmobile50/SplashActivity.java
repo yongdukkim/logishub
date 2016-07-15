@@ -5,16 +5,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class SplashActivity extends Activity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         Handler hd = new Handler();
 
-        hd.postDelayed(new splashhandler() , 3000);
+        FirebaseMessaging.getInstance().subscribeToTopic("test");
+        FirebaseInstanceId.getInstance().getToken();
+
+        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
+
+        //hd.postDelayed(new splashhandler() , 3000);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
 
     private class splashhandler implements Runnable {
         public void run() {
