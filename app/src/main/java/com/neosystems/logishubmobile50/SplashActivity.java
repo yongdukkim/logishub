@@ -10,9 +10,11 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.neosystems.logishubmobile50.Common.Define;
+import com.neosystems.logishubmobile50.Common.PrefsUtil;
 
 public class SplashActivity extends Activity {
-
+    String DeviceToken = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +22,10 @@ public class SplashActivity extends Activity {
         Handler hd = new Handler();
 
         FirebaseMessaging.getInstance().subscribeToTopic("NewLogisHub");
-        String Token = FirebaseInstanceId.getInstance().getToken();
-        Log.d("Push", "Splash token: " + Token);
+        DeviceToken = FirebaseInstanceId.getInstance().getToken();
+        Toast.makeText(getApplicationContext(), DeviceToken, Toast.LENGTH_LONG).show();
 
-        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
-        //hd.postDelayed(new splashhandler() , 3000);
+        hd.postDelayed(new splashhandler() , 3000);
     }
 
     @Override
@@ -40,6 +41,9 @@ public class SplashActivity extends Activity {
 
     private class splashhandler implements Runnable {
         public void run() {
+            if (DeviceToken != "") {
+                PrefsUtil.setValue(Define.DEVICE_ID, DeviceToken);
+            }
             startActivity(new Intent(getApplication(), LoginActivity.class));
             SplashActivity.this.finish();
         }
