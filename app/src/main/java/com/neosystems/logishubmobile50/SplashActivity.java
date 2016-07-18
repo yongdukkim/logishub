@@ -4,14 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.neosystems.logishubmobile50.Common.Define;
-import com.neosystems.logishubmobile50.Common.PrefsUtil;
 
 public class SplashActivity extends Activity {
     String DeviceToken = "";
