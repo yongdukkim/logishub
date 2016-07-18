@@ -23,7 +23,6 @@ public class SplashActivity extends Activity {
 
         FirebaseMessaging.getInstance().subscribeToTopic("NewLogisHub");
         DeviceToken = FirebaseInstanceId.getInstance().getToken();
-        Toast.makeText(getApplicationContext(), DeviceToken, Toast.LENGTH_LONG).show();
 
         hd.postDelayed(new splashhandler() , 3000);
     }
@@ -41,7 +40,10 @@ public class SplashActivity extends Activity {
 
     private class splashhandler implements Runnable {
         public void run() {
-            startActivity(new Intent(getApplication(), LoginActivity.class));
+
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.putExtra("DeviceToken", DeviceToken);
+            startActivity(intent);
             SplashActivity.this.finish();
         }
     }
