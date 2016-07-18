@@ -41,9 +41,6 @@ public class SplashActivity extends Activity {
 
     private class splashhandler implements Runnable {
         public void run() {
-            if (DeviceToken != "") {
-                PrefsUtil.setValue(Define.DEVICE_ID, DeviceToken);
-            }
             startActivity(new Intent(getApplication(), LoginActivity.class));
             SplashActivity.this.finish();
         }
