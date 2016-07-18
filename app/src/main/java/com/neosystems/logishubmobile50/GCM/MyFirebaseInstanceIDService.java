@@ -1,7 +1,5 @@
 package com.neosystems.logishubmobile50.GCM;
 
-import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -17,8 +15,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         sendRegistrationToServer(refreshedToken);
     }
     private void sendRegistrationToServer(String token) {
-        //Intent registrationComplete = new Intent(Define.REGISTRATION_COMPLETE);
-        //registrationComplete.putExtra("token", token);
-        //LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
+        Log.d(TAG, "Refreshed token: " + token);
     }
 }
