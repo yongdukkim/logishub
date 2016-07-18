@@ -1,5 +1,7 @@
 package com.neosystems.logishubmobile50.GCM;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -17,9 +19,12 @@ import com.neosystems.logishubmobile50.MainActivity;
 import com.neosystems.logishubmobile50.R;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    final static String packageName = "com.neosystems.logishubmobile50";
+
     @Override
     public void onMessageReceived(RemoteMessage message) {
         String from = message.getFrom();
@@ -27,8 +32,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title = data.get("title");
         String msg = data.get("message");
 
-        sendNotification(title, msg);
-        //showMessage(this, title, msg);
+        //if (isRunningProcess(this, packageName)) {
+        //    showMessage(this, title, msg);
+        //}
+        //else {
+            sendNotification(title, msg);
+        //}
+    }
+
+    public static boolean isRunningProcess(Context context, String packageName) {
+
+        boolean isRunning = false;
+
+        ActivityManager actMng = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+
+        List<RunningAppProcessInfo> list = actMng.getRunningAppProcesses();
+
+        for(RunningAppProcessInfo rap : list)
+        {
+            if(rap.processName.equals(packageName))
+            {
+                isRunning = true;
+                break;
+            }
+        }
+
+        return isRunning;
     }
 
     private void sendNotification(String title, String message) {
