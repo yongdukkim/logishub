@@ -36,8 +36,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //    showMessage(this, title, msg);
         //}
         //else {
-            sendNotification(title, msg);
+        //    sendNotification(title, msg);
         //}
+
+        sendNotification(title, msg);
     }
 
     public static boolean isRunningProcess(Context context, String packageName) {
