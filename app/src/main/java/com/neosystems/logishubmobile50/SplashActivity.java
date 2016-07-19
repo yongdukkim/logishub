@@ -2,14 +2,21 @@ package com.neosystems.logishubmobile50;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.neosystems.logishubmobile50.Common.Define;
+
+import java.security.MessageDigest;
 
 public class SplashActivity extends Activity {
     String DeviceToken = "";
@@ -19,6 +26,8 @@ public class SplashActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+
+        //getAppKeyHash();
 
         /**
          * FCM Token
@@ -40,6 +49,21 @@ public class SplashActivity extends Activity {
          */
         Handler hd = new Handler();
         hd.postDelayed(new splashhandler() , Define.SPLASHSCREEN_TIME);
+    }
+
+    private void getAppKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                Log.d("Hash key", something);
+            }
+        } catch (Exception e) {
+            Log.e("name not found", e.toString());
+        }
     }
 
     @Override
