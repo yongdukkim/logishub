@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static EditText etResponse;
     public static TextView tvIsConnected;
     public static Context context;
+    long pressTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +75,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+
+        if(System.currentTimeMillis() - pressTime <2000){
+            finishAffinity();
+            return;
+        }
+        Toast.makeText(this,"한 번더 누르시면 앱이 종료됩니다",Toast.LENGTH_LONG).show();
+        pressTime = System.currentTimeMillis();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 
@@ -136,13 +143,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         else
             return false;
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            return false;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 }
