@@ -1,5 +1,6 @@
 package com.neosystems.logishubmobile50;
 
+import android.content.Intent;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        String userProfile = intent.getExtras().getString("userProfile");
+
+        Toast.makeText(getApplicationContext(), userProfile, Toast.LENGTH_LONG).show();
 
         context = MainActivity.this;
         etResponse = (EditText) findViewById(R.id.etResponse);

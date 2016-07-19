@@ -86,12 +86,13 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UserProfile userProfile) {
                     Log.e("UserProfile", userProfile.toString());
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("userProfile", userProfile.toString());
                     startActivity(intent);
                     finish();
                 }
             });
-
         }
 
         @Override
