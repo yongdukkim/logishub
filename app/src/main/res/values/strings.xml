@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="kakao_app_key">11111111111111111111111111</string>
+    <string name="kakao_app_key">d8cf6787b050123ba56edf5d0a1366af</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">ID</string>
