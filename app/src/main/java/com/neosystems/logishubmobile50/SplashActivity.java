@@ -6,21 +6,40 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.neosystems.logishubmobile50.Common.Define;
 
 public class SplashActivity extends Activity {
     String DeviceToken = "";
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-        Handler hd = new Handler();
 
+        /**
+         * FCM Token
+         */
         FirebaseMessaging.getInstance().subscribeToTopic("NewLogisHub");
         DeviceToken = FirebaseInstanceId.getInstance().getToken();
 
-        hd.postDelayed(new splashhandler() , 3000);
+        /**
+         * FireBase Analytics
+         */
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "SplashScreen");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle);
+
+        /**
+         * Splash 화면 전환
+         */
+        Handler hd = new Handler();
+        hd.postDelayed(new splashhandler() , Define.SPLASHSCREEN_TIME);
     }
 
     @Override
@@ -32,7 +51,6 @@ public class SplashActivity extends Activity {
     protected void onPause() {
         super.onPause();
     }
-
 
     private class splashhandler implements Runnable {
         public void run() {
