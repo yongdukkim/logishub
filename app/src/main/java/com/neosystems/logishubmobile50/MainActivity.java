@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         Long userID = intent.getExtras().getLong("userID");
         String userNickName = intent.getExtras().getString("userNickName");
-        int userServiceID = intent.getExtras().getInt("userServiceID");
+
 
         //Toast.makeText(getApplicationContext(), userProfile, Toast.LENGTH_LONG).show();
 
@@ -55,11 +55,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         kakaoLogOut = (Button) findViewById(R.id.kakaoLogOut);
         tvUserID = (TextView) findViewById(R.id.tvUserID);
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
-        tvUserServiceID = (TextView) findViewById(R.id.tvUserServiceID);
 
         tvUserID.setText(Long.toString(userID));
         tvUserNickName.setText(userNickName);
-        tvUserServiceID.setText(Integer.toString(userServiceID));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -104,8 +104,9 @@ public class LoginActivity extends Activity {
                     Log.d("UserProfile", userProfile.toString());
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("userID", userProfile.getId());
+//                    System.out.println("userID: " + userProfile.getId());
                     intent.putExtra("userNickName", userProfile.getNickname());
-                    intent.putExtra("userServiceID", userProfile.getServiceUserId());
+
                     startActivity(intent);
                     LoginActivity.this.finish();
 
