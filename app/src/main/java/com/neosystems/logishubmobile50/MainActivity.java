@@ -92,6 +92,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GeoLocationHandler.getInstance().start();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (GeoLocationHandler.getInstance() != null)
+            GeoLocationHandler.getInstance().stop();
+    }
+
     private void onClickKakaoLogOut() {
         UserManagement.requestLogout(new LogoutResponseCallback() {
             @Override

@@ -264,7 +264,6 @@ public class GeoLocationFinder {
 
     public void clearListeners() {
         if (_locationManager != null) {
-            /*
             if (_enabledGPS && _isReadyGPS && _gpsLocationListener != null)
                 _locationManager.removeUpdates(_gpsLocationListener);
 
@@ -273,7 +272,6 @@ public class GeoLocationFinder {
 
             if (_passiveLocationListener != null)
                 _locationManager.removeUpdates(_passiveLocationListener);
-            */
 
             if (_enabledGPS) {
                 if (_isReadyGPS)
@@ -288,7 +286,6 @@ public class GeoLocationFinder {
     public void stop() {
         if (_locationManager != null) {
 
-            /*
             if (_enabledGPS && _gpsLocationListener != null)
                 _locationManager.removeUpdates(_gpsLocationListener);
 
@@ -297,7 +294,6 @@ public class GeoLocationFinder {
 
             if (_passiveLocationListener != null)
                 _locationManager.removeUpdates(_passiveLocationListener);
-            */
 
             if (_enabledGPS) {
                 _locationManager = null;
