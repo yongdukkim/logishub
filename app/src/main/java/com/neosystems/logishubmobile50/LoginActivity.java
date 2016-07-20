@@ -1,5 +1,6 @@
 package com.neosystems.logishubmobile50;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,10 +19,13 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.neosystems.logishubmobile50.Common.Func;
 
 public class LoginActivity extends AppCompatActivity {
     long pressTime;
     SessionCallback callback;
+    private ProgressDialog m_progDialog = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,11 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        m_progDialog = Func.onCreateProgressDialog(this);
+        m_progDialog.setMessage("카카오 로그인중...");
+        m_progDialog.show();
+
         //간편로그인시 호출 ,없으면 간편로그인시 로그인 성공화면으로 넘어가지 않음
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             return;
@@ -74,24 +83,34 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         //redirectMainActivity();
                     }
+
+                    if(m_progDialog != null)
+                        m_progDialog.dismiss();
                 }
 
                 @Override
                 public void onSessionClosed(ErrorResult errorResult) {
+                    if(m_progDialog != null)
+                        m_progDialog.dismiss();
                 }
 
                 @Override
                 public void onNotSignedUp() {
+                    if(m_progDialog != null)
+                        m_progDialog.dismiss();
                 }
 
                 @Override
                 public void onSuccess(UserProfile userProfile) {
-                    Log.e("UserProfile", userProfile.toString());
+                    Log.d("UserProfile", userProfile.toString());
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("userProfile", userProfile.toString());
                     startActivity(intent);
                     LoginActivity.this.finish();
+
+                    if(m_progDialog != null)
+                        m_progDialog.dismiss();
                 }
             });
         }
@@ -99,6 +118,9 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
             // 세션 연결이 실패했을때
+
+            if(m_progDialog != null)
+                m_progDialog.dismiss();
         }
     }
 
