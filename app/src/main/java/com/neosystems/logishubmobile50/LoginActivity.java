@@ -34,7 +34,7 @@ public class LoginActivity extends Activity {
         String DeviceToken = intent.getExtras().getString("DeviceToken");
         String PhoneNumber = intent.getExtras().getString("PhoneNumber");
 
-        Toast.makeText(getApplicationContext(), DeviceToken + "/"  + PhoneNumber, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), DeviceToken + "/"  + PhoneNumber, Toast.LENGTH_LONG).show();
 
         TextView txtAddOption = (TextView) findViewById(R.id.textView2);
         txtAddOption.setOnClickListener(new View.OnClickListener() {
@@ -102,9 +102,10 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onSuccess(UserProfile userProfile) {
                     Log.d("UserProfile", userProfile.toString());
-
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("userProfile", userProfile.toString());
+                    intent.putExtra("userID", userProfile.getId());
+                    intent.putExtra("userNickName", userProfile.getNickname());
+                    intent.putExtra("userServiceID", userProfile.getServiceUserId());
                     startActivity(intent);
                     LoginActivity.this.finish();
 

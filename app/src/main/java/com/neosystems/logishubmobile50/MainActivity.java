@@ -29,6 +29,9 @@ import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static EditText etResponse;
     public static TextView tvIsConnected;
+    public static TextView tvUserID;
+    public static TextView tvUserNickName;
+    public static TextView tvUserServiceID;
     public static Button kakaoLogOut;
     public static Context context;
     long pressTime;
@@ -39,15 +42,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        String userProfile = intent.getExtras().getString("userProfile");
+        String userID = intent.getExtras().getString("userID");
+        String userNickName = intent.getExtras().getString("userNickName");
+        String userServiceID = intent.getExtras().getString("userServiceID");
 
-        Toast.makeText(getApplicationContext(), userProfile, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), userProfile, Toast.LENGTH_LONG).show();
 
         context = MainActivity.this;
         etResponse = (EditText) findViewById(R.id.etResponse);
         etResponse.setFocusable(false);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
         kakaoLogOut = (Button) findViewById(R.id.kakaoLogOut);
+        tvUserID = (TextView) findViewById(R.id.tvUserID);
+        tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
+        tvUserServiceID = (TextView) findViewById(R.id.tvUserServiceID);
+
+        tvUserID.setText(userID);
+        tvUserNickName.setText(userNickName);
+        tvUserServiceID.setText(userServiceID);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
