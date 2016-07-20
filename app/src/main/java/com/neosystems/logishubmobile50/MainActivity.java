@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        String userID = intent.getExtras().getString("userID");
+        Long userID = intent.getExtras().getLong("userID");
         String userNickName = intent.getExtras().getString("userNickName");
-        String userServiceID = intent.getExtras().getString("userServiceID");
+        int userServiceID = intent.getExtras().getInt("userServiceID");
 
         //Toast.makeText(getApplicationContext(), userProfile, Toast.LENGTH_LONG).show();
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
         tvUserServiceID = (TextView) findViewById(R.id.tvUserServiceID);
 
-        tvUserID.setText(userID);
+        tvUserID.setText(userID.toString());
         tvUserNickName.setText(userNickName);
         tvUserServiceID.setText(userServiceID);
 
