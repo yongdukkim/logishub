@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
         tvUserServiceID = (TextView) findViewById(R.id.tvUserServiceID);
 
-        tvUserID.setText(userID.toString());
+        tvUserID.setText(Long.toString(userID));
         tvUserNickName.setText(userNickName);
-        tvUserServiceID.setText(userServiceID);
+        tvUserServiceID.setText(Integer.toString(userServiceID));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
