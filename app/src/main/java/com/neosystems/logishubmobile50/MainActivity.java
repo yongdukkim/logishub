@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         Long userID = intent.getExtras().getLong("userID");
         String userNickName = intent.getExtras().getString("userNickName");
-        int userServiceID = intent.getExtras().getInt("userServiceID");
+        Long userServiceID = intent.getExtras().getLong("userServiceID");
 
         //Toast.makeText(getApplicationContext(), userProfile, Toast.LENGTH_LONG).show();
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tvUserID.setText(userID.toString());
         tvUserNickName.setText(userNickName);
-        tvUserServiceID.setText(userServiceID);
+        tvUserServiceID.setText(userServiceID.toString());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
