@@ -1,9 +1,9 @@
 package com.neosystems.logishubmobile50;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,14 +14,13 @@ import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 import com.neosystems.logishubmobile50.Common.Func;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
     long pressTime;
     SessionCallback callback;
     private ProgressDialog m_progDialog = null;
