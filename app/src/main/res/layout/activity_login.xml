@@ -37,7 +37,7 @@
         android:text="구글로 계속하기"
         android:id="@+id/button"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="126dp" />
+        android:layout_marginTop="250dp" />
 
     <Button
         android:layout_width="match_parent"
