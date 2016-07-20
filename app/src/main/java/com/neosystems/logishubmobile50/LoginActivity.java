@@ -106,7 +106,7 @@ public class LoginActivity extends Activity {
                     intent.putExtra("userID", userProfile.getId());
 //                    System.out.println("userID: " + userProfile.getId());
                     intent.putExtra("userNickName", userProfile.getNickname());
-                    intent.putExtra("userServiceID", userProfile.getServiceUserId());
+
                     startActivity(intent);
                     LoginActivity.this.finish();
 
