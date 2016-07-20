@@ -29,8 +29,9 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String DeviceToken = intent.getExtras().getString("DeviceToken");
+        String PhoneNumber = intent.getExtras().getString("PhoneNumber");
 
-        Toast.makeText(getApplicationContext(), DeviceToken, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), DeviceToken + "/"  + PhoneNumber, Toast.LENGTH_LONG).show();
 
         TextView txtAddOption = (TextView) findViewById(R.id.textView2);
         txtAddOption.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("userProfile", userProfile.toString());
                     startActivity(intent);
-                    finish();
+                    LoginActivity.this.finish();
                 }
             });
         }
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             finishAffinity();
             return;
         }
-        Toast.makeText(this,"한 번더 누르시면 앱이 종료됩니다",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "한번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_LONG).show();
         pressTime = System.currentTimeMillis();
     }
 }

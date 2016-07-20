@@ -14,10 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
@@ -25,6 +29,7 @@ import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static EditText etResponse;
     public static TextView tvIsConnected;
+    public static Button kakaoLogOut;
     public static Context context;
     long pressTime;
 
@@ -42,9 +47,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         etResponse = (EditText) findViewById(R.id.etResponse);
         etResponse.setFocusable(false);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
+        kakaoLogOut = (Button) findViewById(R.id.kakaoLogOut);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        kakaoLogOut.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onClickKakaoLogOut();
+            }
+        });
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -78,6 +92,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GeoLocationHandler.getInstance().start();
     }
 
+    private void onClickKakaoLogOut() {
+        UserManagement.requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                redirectLoginActivity();
+            }
+        });
+    }
+
+    private void redirectLoginActivity() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.putExtra("DeviceToken", "");
+        intent.putExtra("PhoneNumber", "");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        MainActivity.this.finish();
+    }
+
     @Override
     public void onBackPressed() {
 
@@ -85,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finishAffinity();
             return;
         }
-        Toast.makeText(this,"한 번더 누르시면 앱이 종료됩니다",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "한번 더 누르시면 앱이 종료됩니다.",Toast.LENGTH_LONG).show();
         pressTime = System.currentTimeMillis();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -12,6 +12,13 @@
     tools:context="com.neosystems.logishubmobile50.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <Button
+        android:id="@+id/kakaoLogOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="카카오 로그아웃"
+        android:layout_below="@+id/button" />
+
     <TextView
         android:id="@+id/tvIsConnected"
         android:layout_width="wrap_content"
@@ -28,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:ems="10"
-        android:layout_marginTop="10dp"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:layout_below="@+id/tvIsConnected" />
 
 </RelativeLayout>
