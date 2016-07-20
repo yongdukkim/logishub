@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static TextView tvIsConnected;
     public static TextView tvUserID;
     public static TextView tvUserNickName;
-    public static TextView tvUserServiceID;
     public static Button kakaoLogOut;
     public static Context context;
     long pressTime;
@@ -45,16 +44,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Long userID = intent.getExtras().getLong("userID");
         String userNickName = intent.getExtras().getString("userNickName");
 
-
-        //Toast.makeText(getApplicationContext(), userProfile, Toast.LENGTH_LONG).show();
-
         context = MainActivity.this;
         etResponse = (EditText) findViewById(R.id.etResponse);
         etResponse.setFocusable(false);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
         kakaoLogOut = (Button) findViewById(R.id.kakaoLogOut);
         tvUserID = (TextView) findViewById(R.id.tvUserID);
-
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
 
         tvUserID.setText(Long.toString(userID));
