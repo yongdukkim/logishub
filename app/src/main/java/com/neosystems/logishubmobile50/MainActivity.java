@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("PhoneNumber", "");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        MainActivity.this.finish();
+        finish();
     }
 
     @Override

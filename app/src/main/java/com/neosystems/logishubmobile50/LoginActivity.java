@@ -105,9 +105,8 @@ public class LoginActivity extends Activity {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("userID", userProfile.getId());
                     intent.putExtra("userNickName", userProfile.getNickname());
-
                     startActivity(intent);
-                    LoginActivity.this.finish();
+                    finish();
 
                     if(m_progDialog != null)
                         m_progDialog.dismiss();
