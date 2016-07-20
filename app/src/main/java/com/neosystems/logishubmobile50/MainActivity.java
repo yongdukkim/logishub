@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
         kakaoLogOut = (Button) findViewById(R.id.kakaoLogOut);
         tvUserID = (TextView) findViewById(R.id.tvUserID);
+
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
 
         tvUserID.setText(Long.toString(userID));
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
         if(isConnected()) {
             tvIsConnected.setText("연결");
