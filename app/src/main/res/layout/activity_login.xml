@@ -24,27 +24,26 @@
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/com_kakao_login"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="56dp"
-        android:layout_above="@+id/button2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-    <Button
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogleLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="구글로 계속하기"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="250dp" />
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/com_kakao_login"
+        android:layout_centerHorizontal="true" />
 
-    <Button
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnFaceBookLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="회원가입"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button" />
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btnGoogleLogin"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +51,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="추가옵션"
         android:id="@+id/textView2"
-        android:layout_below="@+id/button2"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/notification_subtext_size" />
+        android:textSize="@dimen/notification_subtext_size"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="300dp"
+        android:gravity="bottom" />
 </RelativeLayout>

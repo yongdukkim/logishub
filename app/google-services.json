@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "520263243853-9qmkger8qf1gs3qf4e12pblemst7692o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neosystems.logishubmobile50",
+            "certificate_hash": "12B8DAC65F3FE200A0BC1EB6A3005BF67E1CF275"
+          }
+        },
+        {
           "client_id": "520263243853-opif91ilputb7sf3m4iq85oo9mjasd90.apps.googleusercontent.com",
           "client_type": 3
         },

@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.Common.Func;
 import com.neosystems.logishubmobile50.MainActivity;
 
@@ -19,13 +20,13 @@ import org.json.JSONObject;
 
 public class VehicleOperationTask extends AsyncTask<String, Void, String> {
 
-    private ProgressDialog m_progDialog = null;
+    private ProgressDialog mProgressDialog = null;
 
     @Override
     protected void onPreExecute() {
-        m_progDialog = Func.onCreateProgressDialog(MainActivity.context);
-        m_progDialog.setMessage("Loading...");
-        m_progDialog.show();
+        mProgressDialog = Func.onCreateProgressDialog(MainActivity.context);
+        mProgressDialog.setMessage(Define.LOADING);
+        mProgressDialog.show();
 
         super.onPreExecute();
     }
@@ -47,8 +48,8 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
             Log.d("ex", e.getLocalizedMessage());
         }
         finally {
-            if(m_progDialog != null)
-                m_progDialog.dismiss();
+            if(mProgressDialog != null)
+                mProgressDialog.dismiss();
         }
     }
 

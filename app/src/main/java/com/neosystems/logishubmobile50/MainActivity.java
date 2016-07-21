@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,20 +21,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
+    private static final String TAG = "MainActivity";
     public static EditText etResponse;
     public static TextView tvIsConnected;
     public static TextView tvUserID;
     public static TextView tvUserNickName;
-    public static Button kakaoLogOut;
+    public static Button btnKakaoLogOut;
+    public static Button btnGoogleLogOut;
     public static Context context;
     long pressTime;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,28 +51,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        Long userID = intent.getExtras().getLong("userID");
+        String userID = intent.getExtras().getString("userID");
         String userNickName = intent.getExtras().getString("userNickName");
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
         context = MainActivity.this;
         etResponse = (EditText) findViewById(R.id.etResponse);
         etResponse.setFocusable(false);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
-        kakaoLogOut = (Button) findViewById(R.id.kakaoLogOut);
+        btnKakaoLogOut = (Button) findViewById(R.id.btnKakaoLogOut);
+        btnGoogleLogOut = (Button) findViewById(R.id.btnGoogleLogOut);
         tvUserID = (TextView) findViewById(R.id.tvUserID);
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
 
-        tvUserID.setText(Long.toString(userID));
+        tvUserID.setText(userID);
         tvUserNickName.setText(userNickName);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        kakaoLogOut.setOnClickListener(new View.OnClickListener() {
-
+        btnKakaoLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickKakaoLogOut();
+            }
+        });
+
+        btnGoogleLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickGoogleLogOut();
             }
         });
 
@@ -112,6 +132,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 redirectLoginActivity();
             }
         });
+    }
+
+    public void onClickGoogleLogOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        redirectLoginActivity();
+                    }
+                });
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
     private void redirectLoginActivity() {
