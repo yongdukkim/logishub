@@ -27,23 +27,26 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="200dp" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnGoogleLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/com_kakao_login"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
-    <com.google.android.gms.common.SignInButton
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/btnFaceBookLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
         android:layout_below="@+id/btnGoogleLogin"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,7 +56,7 @@
         android:id="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/notification_subtext_size"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="300dp"
-        android:gravity="bottom" />
+        android:gravity="bottom"
+        android:layout_below="@+id/login_button"
+        android:layout_marginTop="20dp" />
 </RelativeLayout>

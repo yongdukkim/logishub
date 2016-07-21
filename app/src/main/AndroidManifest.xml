@@ -31,8 +31,10 @@
         <activity android:name=".MainActivity" android:label="LOGISHUB" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Login2Activity" />
+        <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/app_name" />
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
         <!-- [START firebase_service] -->
         <service

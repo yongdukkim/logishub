@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="kakao_app_key">d8cf6787b050123ba56edf5d0a1366af</string>
     <string name="server_client_id">520263243853-9qmkger8qf1gs3qf4e12pblemst7692o.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">1164928190220019</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">ID</string>

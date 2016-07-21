@@ -86,16 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
-        */
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -112,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tvIsConnected.setText("연결실패");
         }
 
-        //위치전송
+        /** Location Timer Start */
         GeoLocationHandler.initialize();
         GeoLocationHandler.getInstance().start();
     }
