@@ -57,6 +57,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/notification_subtext_size"
         android:gravity="bottom"
-        android:layout_below="@+id/login_button"
-        android:layout_marginTop="20dp" />
+        android:layout_below="@+id/btnFaceBookLogin"
+        android:layout_marginTop="10dp" />
 </RelativeLayout>

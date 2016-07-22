@@ -3,6 +3,7 @@ package com.neosystems.logishubmobile50;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -48,15 +49,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     long pressTime;
     SessionCallback callback;
     private CallbackManager callbackManager;
-
     /** Google+ */
     private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
-
-    /** FaceBook */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +61,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         /** FaceBook Init setContext보다 먼저 호출 */
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
+
+        hideActionBar();
 
         Intent intent = getIntent();
         String DeviceToken = intent.getExtras().getString("DeviceToken");
@@ -81,6 +80,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         onLoadKakaoApi();
     }
 
+    /** Action Bar Hide */
+    private void hideActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+    }
+
     @Override
     public void onResume() {
         AppEventsLogger.activateApp(this);
@@ -95,7 +103,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onDestroy() {
-       super.onDestroy();
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
     }
 
     private void onLoadGoogleApi() {
