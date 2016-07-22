@@ -176,21 +176,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
-                System.out.println("Success");
                 GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject json, GraphResponse response) {
                         if (response.getError() != null) {
                             // handle error
-                            System.out.println("ERROR");
                         } else {
-                            System.out.println("Success");
                             try {
                                 String jsonresult = String.valueOf(json);
-                                System.out.println("JSON Result"+jsonresult);
-
-                                String str_email = json.getString("email");
+                                //String str_email = json.getString("email");
                                 String str_id = json.getString("id");
                                 String str_firstname = json.getString("first_name");
                                 String str_lastname = json.getString("last_name");
@@ -225,8 +219,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     /** Kakao Login */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
