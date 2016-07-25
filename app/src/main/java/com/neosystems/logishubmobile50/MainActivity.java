@@ -15,8 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +28,8 @@ import com.google.android.gms.common.api.Status;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.neosystems.logishubmobile50.Common.Define;
+import com.neosystems.logishubmobile50.DATA.LoginSessionData;
+import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
 import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 
@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static TextView tvIsConnected;
     public static TextView tvUserID;
     public static TextView tvUserNickName;
-    public static Button btnKakaoLogOut;
-    public static Button btnGoogleLogOut;
     public static Context context;
     long pressTime;
     private GoogleApiClient mGoogleApiClient;
+    private LoginSessionAdapter mLoginSessionDb = null;
+    private LoginSessionData mLoginSessionData = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String userID = intent.getExtras().getString("userID");
         String userNickName = intent.getExtras().getString("userNickName");
 
+        mLoginSessionDb = new LoginSessionAdapter(this);
+        mLoginSessionDb.open();
+
+        mLoginSessionData = mLoginSessionDb.GetLoginSessionData();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
@@ -61,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         etResponse = (EditText) findViewById(R.id.etResponse);
         etResponse.setFocusable(false);
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
-        btnKakaoLogOut = (Button) findViewById(R.id.btnKakaoLogOut);
-        btnGoogleLogOut = (Button) findViewById(R.id.btnGoogleLogOut);
         tvUserID = (TextView) findViewById(R.id.tvUserID);
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
 
@@ -72,20 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        btnKakaoLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickKakaoLogOut();
-            }
-        });
-
-        btnGoogleLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickGoogleLogOut();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -93,6 +82,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Menu menu = navigationView.getMenu();
+
+        if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_KAKAO)) {
+            menu.findItem(R.id.itmGoogleLogOut).setVisible(false);
+        }
+        else if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_GOOGLE)) {
+            menu.findItem(R.id.itmKakaoLogOut).setVisible(false);
+        }
 
         if(isConnected()) {
             tvIsConnected.setText("연결");
@@ -109,10 +107,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
+
         if (GeoLocationHandler.getInstance() != null)
             GeoLocationHandler.getInstance().stop();
 
-        super.onDestroy();
+        if (mLoginSessionDb != null)
+        {
+            mLoginSessionDb.close();
+            mLoginSessionDb = null;
+        }
     }
 
     private void onClickKakaoLogOut() {
@@ -191,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
@@ -206,6 +209,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_send) {
             Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_LONG).show();
+        } else if (id == R.id.itmKakaoLogOut) {
+            onClickKakaoLogOut();
+        } else if (id == R.id.itmGoogleLogOut) {
+            onClickGoogleLogOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

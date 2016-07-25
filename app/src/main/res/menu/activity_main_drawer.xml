@@ -32,5 +32,23 @@
                 android:title="Send" />
         </menu>
     </item>
+    <item android:title="logout">
+        <menu>
+            <item
+                android:id="@+id/itmKakaoLogOut"
+                android:icon="@drawable/kakaotalk_icon"
+                android:title="로그아웃"
+                />
+        </menu>
+    </item>
+    <item android:title="logout">
+        <menu>
+            <item
+                android:id="@+id/itmGoogleLogOut"
+                android:icon="@drawable/common_google_signin_btn_icon_light"
+                android:title="로그아웃"
+                />
+        </menu>
+    </item>
 
 </menu>

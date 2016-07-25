@@ -39,6 +39,8 @@ import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.Common.Func;
+import com.neosystems.logishubmobile50.DATA.LoginSessionData;
+import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +48,8 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+    private LoginSessionAdapter mLoginSessionDb = null;
+    private LoginSessionData mLoginSessionData = null;
     long pressTime;
     SessionCallback callback;
     private CallbackManager callbackManager;
@@ -61,6 +65,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         /** FaceBook Init setContext보다 먼저 호출 */
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
+
+        mLoginSessionDb = new LoginSessionAdapter(this);
+        mLoginSessionDb.open();
+
+        mLoginSessionData = mLoginSessionDb.GetLoginSessionData();
 
         hideActionBar();
 
@@ -78,6 +87,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         /** kakao Api Load */
         onLoadKakaoApi();
+
+        /** kakao User Check */
+        requestKakao();
     }
 
     /** Action Bar Hide */
@@ -104,7 +116,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onDestroy() {
         super.onDestroy();
+
         Session.getCurrentSession().removeCallback(callback);
+
+        if (mLoginSessionDb != null)
+        {
+            mLoginSessionDb.close();
+            mLoginSessionDb = null;
+        }
     }
 
     private void onLoadGoogleApi() {
@@ -144,11 +163,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.putExtra("userID", acct.getId());
-            intent.putExtra("userNickName", acct.getDisplayName());
-            startActivity(intent);
-            finish();
+            redirectMainActivity(Define.LOGINTYPE_GOOGLE, acct.getId(), acct.getDisplayName());
         } else {
 
         }
@@ -189,11 +204,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 String str_firstname = json.getString("first_name");
                                 String str_lastname = json.getString("last_name");
 
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                intent.putExtra("userID", str_id);
-                                intent.putExtra("userNickName", str_firstname + str_lastname);
-                                startActivity(intent);
-                                finish();
+                                redirectMainActivity(Define.LOGINTYPE_FACEBOOK, str_id, str_firstname + str_lastname);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -212,6 +223,37 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onError(FacebookException error) {
                 Log.d(TAG, error.toString());
+            }
+        });
+    }
+
+    protected void requestKakao() {
+        UserManagement.requestMe(new MeResponseCallback() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                String message = "failed to get user info. msg=" + errorResult;
+                Logger.d(message);
+
+                ErrorCode result = ErrorCode.valueOf(errorResult.getErrorCode());
+                if (result == ErrorCode.CLIENT_ERROR_CODE) {
+                    finish();
+                } else {
+                    Log.d("kakao", "Login Fail.");
+                }
+            }
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                Log.d("kakao", "Login Session Close.");
+            }
+
+            @Override
+            public void onNotSignedUp() {
+            }
+
+            @Override
+            public void onSuccess(UserProfile userProfile) {
+                Logger.d("UserProfile : " + userProfile);
+                redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname());
             }
         });
     }
@@ -242,9 +284,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             case R.id.btnGoogleLogin:
                 onGoogleLogin();
                 break;
-            case R.id.btnFaceBookLogin:
-                onFaceBookLogin();
-                break;
+            //case R.id.btnFaceBookLogin:
+                //onFaceBookLogin();
+               // break;
             case R.id.textView2:
                 startActivity(new Intent(getApplication(), Login2Activity.class));
                 break;
@@ -301,11 +343,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 @Override
                 public void onSuccess(UserProfile userProfile) {
                     Log.d("UserProfile", userProfile.toString());
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("userID", Long.toString(userProfile.getId()));
-                    intent.putExtra("userNickName", userProfile.getNickname());
-                    startActivity(intent);
-                    finish();
+                    redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname());
                 }
             });
         }
@@ -315,6 +353,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             // 세션 연결이 실패했을때
         }
     }
+
+    private void redirectMainActivity(String LoginType, String LoginUserID, String LoginUserName) {
+
+        mLoginSessionDb.DeleteLoginSessionData();
+
+        mLoginSessionData.SetLoginType(LoginType);
+        mLoginSessionData.SetLoginUserID(LoginUserID);
+        mLoginSessionData.SetLoginUserName(LoginUserName);
+        mLoginSessionDb.CreateLoginSessionData(mLoginSessionData);
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("userID", LoginUserID);
+        intent.putExtra("userNickName", LoginUserName);
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     public void onBackPressed() {

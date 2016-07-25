@@ -24,4 +24,7 @@ public class Define {
     public static final String REGISTRATION_GENERATING = "registrationGenerating";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
     public static final String LOADING = "Loading...";
+    public static final String LOGINTYPE_KAKAO = "KAKAO";
+    public static final String LOGINTYPE_GOOGLE = "GOOGLE";
+    public static final String LOGINTYPE_FACEBOOK = "FACEBOOK";
 }

@@ -19,6 +19,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.neosystems.logishubmobile50.Common.Define;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class SplashActivity extends Activity {
     String DeviceToken = "";

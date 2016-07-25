@@ -12,22 +12,6 @@
     tools:context="com.neosystems.logishubmobile50.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <Button
-        android:id="@+id/btnKakaoLogOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="kakao LogOut" />
-
-    <Button
-        android:id="@+id/btnGoogleLogOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Google LogOut"
-        android:layout_below="@+id/tvIsConnected"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp" />
-
     <TextView
         android:id="@+id/tvUserID"
         android:layout_width="match_parent"
@@ -37,9 +21,10 @@
         android:textColor="#000000"
         android:gravity="center"
         android:height="30dp"
-        android:layout_marginBottom="35dp"
         android:text=""
-        android:layout_marginTop="100dp" />
+        android:layout_above="@+id/etResponse"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/tvUserNickName"
@@ -51,7 +36,10 @@
         android:height="30dp"
         android:gravity="center"
         android:text=""
-        android:layout_marginTop="135dp" />
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/tvUserID"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/tvIsConnected"
@@ -71,6 +59,6 @@
         android:ems="10"
         android:inputType="textMultiLine"
         android:layout_below="@+id/tvIsConnected"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="100dp" />
 
 </RelativeLayout>
