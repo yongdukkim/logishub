@@ -2,6 +2,7 @@ package com.neosystems.logishubmobile50;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -163,7 +164,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            redirectMainActivity(Define.LOGINTYPE_GOOGLE, acct.getId(), acct.getDisplayName());
+            String userImageUrl = "";
+
+            if (acct.getPhotoUrl() != null)
+                userImageUrl = acct.getPhotoUrl().getPath();
+
+            redirectMainActivity(Define.LOGINTYPE_GOOGLE, acct.getId(), acct.getDisplayName(), userImageUrl);
         } else {
 
         }
@@ -179,7 +185,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-
                     }
                 });
     }
@@ -204,7 +209,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 String str_firstname = json.getString("first_name");
                                 String str_lastname = json.getString("last_name");
 
-                                redirectMainActivity(Define.LOGINTYPE_FACEBOOK, str_id, str_firstname + str_lastname);
+                                redirectMainActivity(Define.LOGINTYPE_FACEBOOK, str_id, str_firstname + str_lastname, "");
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -253,7 +258,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onSuccess(UserProfile userProfile) {
                 Logger.d("UserProfile : " + userProfile);
-                redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname());
+                redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname(), userProfile.getProfileImagePath());
             }
         });
     }
@@ -284,15 +289,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             case R.id.btnGoogleLogin:
                 onGoogleLogin();
                 break;
-            //case R.id.btnFaceBookLogin:
-                //onFaceBookLogin();
-               // break;
             case R.id.textView2:
                 startActivity(new Intent(getApplication(), Login2Activity.class));
                 break;
-            //case R.id.disconnect_button:
-            //    revokeAccess();
-            //    break;
         }
     }
 
@@ -343,7 +342,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 @Override
                 public void onSuccess(UserProfile userProfile) {
                     Log.d("UserProfile", userProfile.toString());
-                    redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname());
+                    redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname(), userProfile.getProfileImagePath());
                 }
             });
         }
@@ -354,13 +353,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void redirectMainActivity(String LoginType, String LoginUserID, String LoginUserName) {
-
+    private void redirectMainActivity(String LoginType, String LoginUserID, String LoginUserName, String LoginUserLoginUrl) {
         mLoginSessionDb.DeleteLoginSessionData();
-
         mLoginSessionData.SetLoginType(LoginType);
         mLoginSessionData.SetLoginUserID(LoginUserID);
         mLoginSessionData.SetLoginUserName(LoginUserName);
+        mLoginSessionData.SetLoginUserImageUrl(LoginUserLoginUrl);
         mLoginSessionDb.CreateLoginSessionData(mLoginSessionData);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

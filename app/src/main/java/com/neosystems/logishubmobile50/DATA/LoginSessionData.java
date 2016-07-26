@@ -7,6 +7,7 @@ public class LoginSessionData implements Parcelable, Cloneable {
     private String sLoginType = "";
     private String sLoginUserID = "";
     private String sLoginUserName = "";
+    private String sLoginUserImageUrl = "";
 
     //생성자
     public LoginSessionData(){}
@@ -37,6 +38,7 @@ public class LoginSessionData implements Parcelable, Cloneable {
         this.sLoginType = src.readString();
         this.sLoginUserID = src.readString();
         this.sLoginUserName = src.readString();
+        this.sLoginUserImageUrl = src.readString();
     }
 
     @Override
@@ -45,6 +47,7 @@ public class LoginSessionData implements Parcelable, Cloneable {
         dest.writeString(this.sLoginType);
         dest.writeString(this.sLoginUserID);
         dest.writeString(this.sLoginUserName);
+        dest.writeString(this.sLoginUserImageUrl);
     }
 
     //========================================setter ===============================================
@@ -63,6 +66,11 @@ public class LoginSessionData implements Parcelable, Cloneable {
         this.sLoginUserName = sVal;
     }
 
+    public void SetLoginUserImageUrl(String sVal)
+    {
+        this.sLoginUserImageUrl = sVal;
+    }
+
     //========================================getter ===============================================
     public String GetLoginType()
     {
@@ -77,6 +85,11 @@ public class LoginSessionData implements Parcelable, Cloneable {
     public String GetLoginUserName()
     {
         return this.sLoginUserName;
+    }
+
+    public String GetLoginUserImageUrl()
+    {
+        return this.sLoginUserImageUrl;
     }
 
     //객체복사

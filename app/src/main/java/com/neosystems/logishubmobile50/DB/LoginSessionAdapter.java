@@ -16,6 +16,7 @@ public class LoginSessionAdapter {
     public static final String KEY_LOGIN_TYPE = "LoginType";
     public static final String KEY_LOGIN_USER_ID = "LoginUserID";
     public static final String KEY_LOGIN_USER_NAME = "LoginUserName";
+    public static final String KEY_LOGIN_USER_IMAGE_URL = "LoginUserImageUrl";
     public static final String KEY_NEW_COUNT = "NewCount";
     private final String DATABASE_NAME = "LoginSession";
     private final String DATABASE_TABLE = "TB_LoginSession";
@@ -27,7 +28,8 @@ public class LoginSessionAdapter {
     private static final String DATABASE_CREATE =
             "create table TB_LoginSession (LoginType text primary key ,"+
                     "LoginUserID text null," +
-                    "LoginUserName text null" +
+                    "LoginUserName text null," +
+                    "LoginUserImageUrl text null" +
                     ");";
 
     public LoginSessionAdapter(Context ctx)
@@ -70,7 +72,7 @@ public class LoginSessionAdapter {
         else
             arrLoginSessionData.clear();
 
-        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME}, null, null, null, null, null, null);
+        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME, KEY_LOGIN_USER_IMAGE_URL}, null, null, null, null, null, null);
 
         if(cs.moveToFirst()) {
             do {
@@ -87,7 +89,7 @@ public class LoginSessionAdapter {
     {
         LoginSessionData data = new LoginSessionData();
 
-        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME}, null, null, null, null, null, null);
+        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME, KEY_LOGIN_USER_IMAGE_URL}, null, null, null, null, null, null);
 
         if(cs.moveToFirst())
         {
@@ -139,6 +141,7 @@ public class LoginSessionAdapter {
         data.SetLoginType(cs.getString(nPos++));
         data.SetLoginUserID(cs.getString(nPos++));
         data.SetLoginUserName(cs.getString(nPos++));
+        data.SetLoginUserImageUrl(cs.getString(nPos++));
 
         return data;
     }
@@ -150,6 +153,7 @@ public class LoginSessionAdapter {
         val.put(KEY_LOGIN_TYPE, Data.GetLoginType());
         val.put(KEY_LOGIN_USER_ID, Data.GetLoginUserID());
         val.put(KEY_LOGIN_USER_NAME, Data.GetLoginUserName());
+        val.put(KEY_LOGIN_USER_IMAGE_URL, Data.GetLoginUserName());
 
         return val;
     }
