@@ -2,7 +2,7 @@ package com.neosystems.logishubmobile50;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -125,6 +125,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             mLoginSessionDb.close();
             mLoginSessionDb = null;
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     private void onLoadGoogleApi() {
@@ -367,7 +372,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         startActivity(intent);
         finish();
     }
-
 
     @Override
     public void onBackPressed() {

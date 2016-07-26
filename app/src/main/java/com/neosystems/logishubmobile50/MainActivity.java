@@ -3,6 +3,7 @@ package com.neosystems.logishubmobile50;
 import android.content.Intent;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -117,6 +118,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mLoginSessionDb.close();
             mLoginSessionDb = null;
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     private void onClickKakaoLogOut() {
