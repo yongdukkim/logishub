@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,10 +87,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Menu menu = navigationView.getMenu();
 
         if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_KAKAO)) {
-            menu.findItem(R.id.itmGoogleLogOut).setVisible(false);
+            menu.findItem(R.id.googleLogOut).setVisible(false);
         }
         else if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_GOOGLE)) {
-            menu.findItem(R.id.itmKakaoLogOut).setVisible(false);
+            menu.findItem(R.id.kakaoLogOut).setVisible(false);
         }
 
         if(isConnected()) {

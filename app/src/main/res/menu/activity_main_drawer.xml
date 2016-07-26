@@ -32,7 +32,7 @@
                 android:title="Send" />
         </menu>
     </item>
-    <item android:title="logout">
+    <item android:id="@+id/kakaoLogOut" android:title="logout">
         <menu>
             <item
                 android:id="@+id/itmKakaoLogOut"
@@ -41,7 +41,7 @@
                 />
         </menu>
     </item>
-    <item android:title="logout">
+    <item android:id="@+id/googleLogOut" android:title="logout">
         <menu>
             <item
                 android:id="@+id/itmGoogleLogOut"
