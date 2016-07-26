@@ -375,7 +375,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onBackPressed() {
-        if(System.currentTimeMillis() - pressTime <2000){
+        if(System.currentTimeMillis() - pressTime <2000) {
             finishAffinity();
             return;
         }
