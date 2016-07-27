@@ -36,7 +36,7 @@
         <menu>
             <item
                 android:id="@+id/itmKakaoLogOut"
-                android:icon="@drawable/kakaotalk_icon"
+                android:icon="@drawable/kakao_icon"
                 android:title="로그아웃"
                 />
         </menu>

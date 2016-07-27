@@ -9,9 +9,11 @@ import java.net.HttpURLConnection;
 import java.io.BufferedInputStream;
 
 import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.Common.Func;
 import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
@@ -22,14 +24,11 @@ import org.json.JSONObject;
 
 public class VehicleOperationTask extends AsyncTask<String, Void, String> {
 
-    private ProgressDialog mProgressDialog = null;
+    private CustomProgressDialog mProgressDialog;
 
     @Override
     protected void onPreExecute() {
-        mProgressDialog = Func.onCreateProgressDialog(MainActivity.context);
-        mProgressDialog.setMessage(Define.LOADING);
-        mProgressDialog.show();
-
+        showProgressDialog();
         super.onPreExecute();
     }
 
@@ -62,8 +61,8 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
             Log.d("ex", e.getLocalizedMessage());
         }
         finally {
-            if(mProgressDialog != null)
-                mProgressDialog.dismiss();
+            //if(mProgressDialog != null)
+                //hideProgressDialog();
         }
     }
 
@@ -97,5 +96,17 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
 
         inputStream.close();
         return result;
+    }
+
+    private void showProgressDialog() {
+        mProgressDialog = new CustomProgressDialog(MainActivity.context);
+        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 }
