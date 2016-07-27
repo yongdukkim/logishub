@@ -49,9 +49,6 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MainActivity";
     public static EditText etResponse;
-    public static TextView tvIsConnected;
-    public static TextView tvUserID;
-    public static TextView tvUserNickName;
     public static Context context;
     public ImageView ivUserProfile;
     public static TextView tvUserProfileName;
@@ -82,14 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         context = MainActivity.this;
         etResponse = (EditText) findViewById(R.id.etResponse);
         etResponse.setFocusable(false);
-        tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
-        tvUserID = (TextView) findViewById(R.id.tvUserID);
-        tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
         ivUserProfile = (ImageView)findViewById(R.id.ivUserProfile);
         tvUserProfileName = (TextView) findViewById(R.id.tvUserProfileName);
-
-        tvUserID.setText(userID);
-        tvUserNickName.setText(userNickName);
+        tvUserProfileName.setText(userNickName + "님 환영합니다.");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,11 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if(isConnected()) {
-            tvIsConnected.setText("연결");
             new VehicleOperationTask().execute(Define.LOGISHUBURL + Define.VEHICLEORPERATION);
         }
         else {
-            tvIsConnected.setText("연결실패");
         }
 
         /** userProfile Image Load */
@@ -179,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
     }
-
 
     private void onClickKakaoLogOut() {
         UserManagement.requestLogout(new LogoutResponseCallback() {
