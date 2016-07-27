@@ -172,7 +172,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             String userImageUrl = "";
 
             if (acct.getPhotoUrl() != null)
-                userImageUrl = acct.getPhotoUrl().getPath();
+                userImageUrl = acct.getPhotoUrl().toString();
 
             redirectMainActivity(Define.LOGINTYPE_GOOGLE, acct.getId(), acct.getDisplayName(), userImageUrl);
         } else {

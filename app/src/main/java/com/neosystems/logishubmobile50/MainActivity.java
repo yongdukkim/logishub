@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +34,17 @@ import com.google.android.gms.common.api.Status;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.neosystems.logishubmobile50.Common.Define;
+import com.neosystems.logishubmobile50.Common.HTTPUtil;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
 import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
 import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MainActivity";
@@ -41,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static TextView tvUserID;
     public static TextView tvUserNickName;
     public static Context context;
+    public ImageView ivUserProfile;
+    public static TextView tvUserProfileName;
+    Bitmap bitmap;
+
     long pressTime;
     private GoogleApiClient mGoogleApiClient;
     private LoginSessionAdapter mLoginSessionDb = null;
@@ -69,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvIsConnected = (TextView) findViewById(R.id.tvIsConnected);
         tvUserID = (TextView) findViewById(R.id.tvUserID);
         tvUserNickName = (TextView) findViewById(R.id.tvUserNickName);
+        ivUserProfile = (ImageView)findViewById(R.id.ivUserProfile);
+        tvUserProfileName = (TextView) findViewById(R.id.tvUserProfileName);
 
         tvUserID.setText(userID);
         tvUserNickName.setText(userNickName);
@@ -101,6 +119,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tvIsConnected.setText("연결실패");
         }
 
+        /** userProfile Image Load */
+        if (mLoginSessionData.GetLoginUserImageUrl() != "") {
+            onUserProfileLoad();
+        }
+
         /** Location Timer Start */
         GeoLocationHandler.initialize();
         GeoLocationHandler.getInstance().start();
@@ -124,6 +147,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
+
+    private void onUserProfileLoad() {
+        final String userProfileUrl = mLoginSessionData.GetLoginUserImageUrl();
+
+        Thread mThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(userProfileUrl);
+
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
+
+                    InputStream is = conn.getInputStream();
+                    bitmap = BitmapFactory.decodeStream(is);
+
+                } catch (IOException ex) {
+
+                }
+            }
+        };
+
+        mThread.start();
+
+        try {
+            mThread.join();
+            ivUserProfile.setImageBitmap(bitmap);
+        } catch (InterruptedException e) {
+
+        }
+    }
+
 
     private void onClickKakaoLogOut() {
         UserManagement.requestLogout(new LogoutResponseCallback() {

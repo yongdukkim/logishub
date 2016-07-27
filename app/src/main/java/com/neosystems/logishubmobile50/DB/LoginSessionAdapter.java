@@ -153,7 +153,7 @@ public class LoginSessionAdapter {
         val.put(KEY_LOGIN_TYPE, Data.GetLoginType());
         val.put(KEY_LOGIN_USER_ID, Data.GetLoginUserID());
         val.put(KEY_LOGIN_USER_NAME, Data.GetLoginUserName());
-        val.put(KEY_LOGIN_USER_IMAGE_URL, Data.GetLoginUserName());
+        val.put(KEY_LOGIN_USER_IMAGE_URL, Data.GetLoginUserImageUrl());
 
         return val;
     }
