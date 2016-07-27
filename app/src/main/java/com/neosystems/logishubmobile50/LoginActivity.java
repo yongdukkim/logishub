@@ -279,6 +279,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void showProgressDialog() {
         mProgressDialog = new CustomProgressDialog(this);
         mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
     }
 

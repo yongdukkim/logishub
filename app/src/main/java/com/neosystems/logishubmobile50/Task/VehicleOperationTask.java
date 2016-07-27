@@ -8,14 +8,11 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.BufferedInputStream;
 
-import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
-import com.neosystems.logishubmobile50.Common.Define;
-import com.neosystems.logishubmobile50.Common.Func;
 import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
 import com.neosystems.logishubmobile50.MainActivity;
 
@@ -61,8 +58,8 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
             Log.d("ex", e.getLocalizedMessage());
         }
         finally {
-            //if(mProgressDialog != null)
-                //hideProgressDialog();
+            if(mProgressDialog != null)
+                hideProgressDialog();
         }
     }
 
@@ -101,6 +98,7 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
     private void showProgressDialog() {
         mProgressDialog = new CustomProgressDialog(MainActivity.context);
         mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
     }
 
