@@ -6,22 +6,26 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,21 +38,20 @@ import com.google.android.gms.common.api.Status;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.neosystems.logishubmobile50.Common.Define;
-import com.neosystems.logishubmobile50.Common.HTTPUtil;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
+import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
 import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
 import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MainActivity";
-    public static EditText etResponse;
     public static Context context;
     public ImageView ivUserProfile;
     public static TextView tvUserProfileName;
@@ -58,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private GoogleApiClient mGoogleApiClient;
     private LoginSessionAdapter mLoginSessionDb = null;
     private LoginSessionData mLoginSessionData = null;
+    public static ArrayList<VehicleOperationData> mArrVehicleOperationList = null;
+    private ListView mlvVehiceOperation = null;
+    public static VehicleOperationListAdapter mVehicleOperationListAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
         context = MainActivity.this;
-        etResponse = (EditText) findViewById(R.id.etResponse);
-        etResponse.setFocusable(false);
         ivUserProfile = (ImageView)findViewById(R.id.ivUserProfile);
         tvUserProfileName = (TextView) findViewById(R.id.tvUserProfileName);
         tvUserProfileName.setText(userNickName + "님 환영합니다.");
@@ -117,6 +121,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /** Location Timer Start */
         GeoLocationHandler.initialize();
         GeoLocationHandler.getInstance().start();
+
+        /** ListView */
+        mArrVehicleOperationList = new ArrayList<VehicleOperationData>();
+        mlvVehiceOperation = (ListView) this.findViewById(R.id.lvVehicleOperation);
+        mVehicleOperationListAdapter = new VehicleOperationListAdapter(this, R.layout.vehicleoperationlist_list, mArrVehicleOperationList);
+        mlvVehiceOperation.setAdapter(mVehicleOperationListAdapter);
     }
 
     @Override
@@ -139,13 +149,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void onUserProfileLoad() {
-        final String userProfileUrl = mLoginSessionData.GetLoginUserImageUrl();
 
         Thread mThread = new Thread() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL(userProfileUrl);
+                    URL url = new URL(mLoginSessionData.GetLoginUserImageUrl());
 
                     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                     conn.setDoInput(true);
@@ -269,6 +278,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /** List Adapter */
+    public class VehicleOperationListAdapter extends ArrayAdapter<VehicleOperationData>
+    {
+        private ArrayList<VehicleOperationData> itemList;
+        private Context context;
+        private int rowResourceId;
+
+        public VehicleOperationListAdapter(Context context, int textViewResourceId, ArrayList<VehicleOperationData> itemList)
+        {
+            super(context, textViewResourceId, itemList);
+
+            this.itemList = itemList;
+            this.context = context;
+
+            this.rowResourceId = textViewResourceId;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View v = convertView;
+
+            VehicleOperationData item = itemList.get(position);
+
+            if(item != null)
+            {
+                v = SetVehicleOperationList(context, v, this.rowResourceId, item);
+            }
+
+            return v;
+        }
+    }
+
+    private View SetVehicleOperationList(Context context, View v, int rowResourceId, VehicleOperationData Data)
+    {
+        LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        v = vi.inflate(R.layout.vehicleoperationlist_list,null);
+
+        TextView tvLon = (TextView) v.findViewById(R.id.tvLon);
+        TextView tvLat = (TextView) v.findViewById(R.id.tvLat);
+        TextView tvAddr = (TextView) v.findViewById(R.id.tvAddr);
+
+        v.setBackgroundColor(Color.rgb(247, 247, 247));
+
+        tvLon.setText(Html.fromHtml(""+ Data.GetLon() + ""));
+        tvLat.setText(Html.fromHtml(""+ Data.GetLat() + ""));
+        tvAddr.setText(Html.fromHtml(""+ Data.GetAddr() + ""));
+
+        return v;
     }
 
     public boolean isConnected() {

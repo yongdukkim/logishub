@@ -12,11 +12,10 @@
     tools:context="com.neosystems.logishubmobile50.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <EditText
-        android:id="@+id/etResponse"
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/lvVehicleOperation"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        />
 
 </RelativeLayout>

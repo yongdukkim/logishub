@@ -50,7 +50,6 @@ public class LoginSessionData implements Parcelable, Cloneable {
         dest.writeString(this.sLoginUserImageUrl);
     }
 
-    //========================================setter ===============================================
     public void SetLoginType(String sVal)
     {
         this.sLoginType = sVal;
@@ -71,7 +70,6 @@ public class LoginSessionData implements Parcelable, Cloneable {
         this.sLoginUserImageUrl = sVal;
     }
 
-    //========================================getter ===============================================
     public String GetLoginType()
     {
         return this.sLoginType;
