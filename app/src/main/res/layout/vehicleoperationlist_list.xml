@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lo_VehicleOperationList"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#f7f7f7"
+    android:paddingTop="1dip"
+    android:paddingBottom="1dip"
+    android:paddingLeft="1dip"
+    android:paddingRight="1dip"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/lo_SelectList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        >
+        <TextView
+            android:id="@+id/tvLon"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor= "#000000"
+            android:textSize = "18dip"
+            android:text="Lon"
+            android:layout_weight="1"
+            />
+
+        <!--<View
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dip"
+            android:layout_marginRight="1dip"
+            android:background="#FF909090" />-->
+
+        <TextView
+            android:id="@+id/tvLat"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor= "#000000"
+            android:textSize = "18dip"
+            android:text="Lat"
+            android:layout_weight="1"
+            />
+
+        <!--<View
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dip"
+            android:layout_marginRight="1dip"
+            android:background="#FF909090" />-->
+
+        <TextView
+            android:id="@+id/tvAddr"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor= "#000000"
+            android:textSize = "18dip"
+            android:text="주소"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
