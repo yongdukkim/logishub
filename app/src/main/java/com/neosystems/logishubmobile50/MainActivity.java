@@ -217,10 +217,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-        if(System.currentTimeMillis() - pressTime <2000){
+        if(System.currentTimeMillis() - pressTime < 2000) {
             finishAffinity();
             return;
         }
+
         Toast.makeText(this, "한번 더 누르시면 앱이 종료됩니다.",Toast.LENGTH_LONG).show();
         pressTime = System.currentTimeMillis();
 
