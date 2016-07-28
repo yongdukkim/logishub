@@ -260,13 +260,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        Fragment fragment = null;
-        String title = getString(R.string.app_name);
-
         if (id == R.id.nav_camera) {
             onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN);
         } else if (id == R.id.nav_gallery) {
-            onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_WEB);
+            onFragmentMove(Define.FRAGMENT_TYPE_WEB, Define.ACTION_HEADER_WEB);
         } else if (id == R.id.nav_slideshow) {
             Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_manage) {
