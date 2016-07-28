@@ -41,7 +41,6 @@ import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.Common.Define;
-import com.neosystems.logishubmobile50.Common.Func;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
 import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
 
@@ -280,6 +279,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mProgressDialog = new CustomProgressDialog(this);
         mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
     }
 

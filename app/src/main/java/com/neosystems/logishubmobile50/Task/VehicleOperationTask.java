@@ -99,6 +99,7 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
         mProgressDialog = new CustomProgressDialog(MainActivity.context);
         mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
     }
 
