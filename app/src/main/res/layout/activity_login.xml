@@ -21,7 +21,7 @@
         android:textStyle="bold"
         android:textSize="@dimen/abc_action_bar_progress_bar_size" />
 
-    <com.kakao.usermgmt.LoginButton
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/com_kakao_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,24 +29,26 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="false"
-        android:layout_marginTop="200dp" />
+        android:layout_marginTop="200dp"
+        android:text="LOGIN WITH KAKAO"/>
 
-    <com.google.android.gms.common.SignInButton
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnGoogleLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/com_kakao_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:text="LOGIN WITH GOOGLE"/>
 
-    <com.facebook.login.widget.LoginButton
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnFaceBookLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/btnGoogleLogin"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginTop="20dp"
+        android:text="LOGIN WITH FACEBOOK"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -8,12 +8,19 @@
     android:orientation="vertical"
     tools:context="com.neosystems.logishubmobile50.SplashActivity">
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dip"-->
+        <!--android:layout_weight="100"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@mipmap/splash" />-->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="100"
-        android:scaleType="fitXY"
-        android:src="@mipmap/splash" />
+        android:layout_height="match_parent"
+        android:text="Welcome to LogisHub M"
+        android:textAllCaps="true"
+
+        android:gravity="center"/>
 
 </LinearLayout>
