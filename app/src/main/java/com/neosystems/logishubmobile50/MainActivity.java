@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
 import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ArrayList<VehicleOperationData> mArrVehicleOperationList = null;
     private ListView mlvVehiceOperation = null;
     public static VehicleOperationListAdapter mVehicleOperationListAdapter = null;
+    private CustomProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void onClickKakaoLogOut() {
+        showProgressDialog();
         UserManagement.requestLogout(new LogoutResponseCallback() {
             @Override
             public void onCompleteLogout() {
@@ -189,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void onClickGoogleLogOut() {
+        showProgressDialog();
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
@@ -211,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("PhoneNumber", "");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        hideProgressDialog();
         finish();
     }
 
@@ -339,5 +345,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         else
             return false;
+    }
+
+    private void showProgressDialog() {
+        mProgressDialog = new CustomProgressDialog(this);
+        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 }
