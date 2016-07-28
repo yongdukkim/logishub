@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 public class WebViewFragment extends Fragment {
     public WebView mWebView;
     public View mView;
+    public String mUrl;
 
     public WebViewFragment() {
 
@@ -22,6 +23,9 @@ public class WebViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_logishubweb, container, false);
+
+        Bundle extra = getArguments();
+        mUrl = extra.getString("url");
 
         setLayout(mView);
 
@@ -50,7 +54,7 @@ public class WebViewFragment extends Fragment {
                 }
             }
         });
-        mWebView.loadUrl("http://dev.logishub.net/portal_dev/index.html");
+        mWebView.loadUrl(mUrl);
     }
 
     private class WebViewClientClass extends WebViewClient {

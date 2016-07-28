@@ -1,6 +1,5 @@
 package com.neosystems.logishubmobile50;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
@@ -70,9 +69,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         onOpenDB();
 
-        setLayout();
-
         hideActionBar();
+
+        setLayout();
 
         /** Google Api Load */
         onLoadGoogleApi();
@@ -206,45 +205,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     /** FaceBook Login */
     private void onFaceBookLogin() {
-        callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email","user_photos","public_profile"));
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject json, GraphResponse response) {
-                        if (response.getError() != null) {
-                            // handle error
-                        } else {
-                            try {
-                                String jsonresult = String.valueOf(json);
-                                //String str_email = json.getString("email");
-                                String str_id = json.getString("id");
-                                String str_firstname = json.getString("first_name");
-                                String str_lastname = json.getString("last_name");
 
-                                redirectMainActivity(Define.LOGINTYPE_FACEBOOK, str_id, str_firstname + str_lastname, "");
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-
-                }).executeAsync();
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "On cancel");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, error.toString());
-            }
-        });
     }
 
     protected void requestKakao() {
@@ -288,7 +249,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mProgressDialog = new CustomProgressDialog(this);
         mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
     }
 

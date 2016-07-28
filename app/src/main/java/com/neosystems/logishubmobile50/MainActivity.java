@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GeoLocationHandler.getInstance().start();
 
         /** Main Fragment */
-        onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN);
+        onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN, null);
     }
 
     @Override
@@ -261,9 +261,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN);
+            onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN, null);
         } else if (id == R.id.nav_gallery) {
-            onFragmentMove(Define.FRAGMENT_TYPE_WEB, Define.ACTION_HEADER_WEB);
+            onFragmentMove(Define.FRAGMENT_TYPE_WEB, Define.ACTION_HEADER_WEB, Define.LOGISHUB_URL_INDEX);
         } else if (id == R.id.nav_slideshow) {
             Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_manage) {
@@ -283,11 +283,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void onFragmentMove(String FragmentType, String Title) {
+    private void onFragmentMove(String FragmentType, String Title, String url) {
         if (FragmentType.equals(Define.FRAGMENT_TYPE_MAIN)) {
             fragment = new MainFragment();
         } else if (FragmentType.equals(Define.FRAGMENT_TYPE_WEB)) {
             fragment = new WebViewFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("url", url);
+            fragment.setArguments(bundle);
         }
 
         if (fragment != null) {

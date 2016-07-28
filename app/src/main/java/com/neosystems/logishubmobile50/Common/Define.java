@@ -33,4 +33,6 @@ public class Define {
 
     public static final String ACTION_HEADER_MAIN = "LOGISHUB";
     public static final String ACTION_HEADER_WEB = "WEB";
+
+    public static final String LOGISHUB_URL_INDEX = "http://m.logishub.net/index.html";
 }
