@@ -25,12 +25,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     long pressTime;
     private GoogleApiClient mGoogleApiClient;
+    private FirebaseAuth mAuth;
     private LoginSessionAdapter mLoginSessionDb = null;
     private LoginSessionData mLoginSessionData = null;
     private CustomProgressDialog mProgressDialog;
@@ -104,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
+        mAuth = FirebaseAuth.getInstance();
+
         Intent intent = getIntent();
         String userID = intent.getExtras().getString("userID");
         String userNickName = intent.getExtras().getString("userNickName");
@@ -128,9 +133,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_KAKAO)) {
             menu.findItem(R.id.googleLogOut).setVisible(false);
-        }
-        else if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_GOOGLE)) {
+            menu.findItem(R.id.faceBookLogOut).setVisible(false);
+        } else if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_GOOGLE)) {
             menu.findItem(R.id.kakaoLogOut).setVisible(false);
+            menu.findItem(R.id.faceBookLogOut).setVisible(false);
+        } else if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_FACEBOOK)) {
+            menu.findItem(R.id.kakaoLogOut).setVisible(false);
+            menu.findItem(R.id.googleLogOut).setVisible(false);
         }
     }
 
@@ -197,6 +206,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         redirectLoginActivity();
                     }
                 });
+    }
+
+    public void onClickFaceBookLogOut() {
+        showProgressDialog();
+        mAuth.signOut();
+        LoginManager.getInstance().logOut();
+
+        redirectLoginActivity();
     }
 
     @Override
@@ -276,6 +293,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             onClickKakaoLogOut();
         } else if (id == R.id.itmGoogleLogOut) {
             onClickGoogleLogOut();
+        } else if (id == R.id.itmFaceBookLogOut) {
+            onClickFaceBookLogOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

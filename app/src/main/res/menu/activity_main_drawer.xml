@@ -50,5 +50,14 @@
                 />
         </menu>
     </item>
+    <item android:id="@+id/faceBookLogOut" android:title="logout">
+        <menu>
+            <item
+                android:id="@+id/itmFaceBookLogOut"
+                android:icon="@drawable/com_facebook_button_icon_blue"
+                android:title="로그아웃"
+                />
+        </menu>
+    </item>
 
 </menu>
