@@ -15,6 +15,7 @@ import android.util.Log;
 import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
 import com.neosystems.logishubmobile50.MainActivity;
+import com.neosystems.logishubmobile50.MainFragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
         try
         {
             JSONArray jsonArray = new JSONArray(result);
-            MainActivity.mArrVehicleOperationList.clear();
+            MainFragment.mArrVehicleOperationList.clear();
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 VehicleOperationData Data = new VehicleOperationData();
@@ -49,8 +50,8 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
                 Data.SetLat(jObject.getString("lat"));
                 Data.SetAddr(jObject.getString("addr"));
 
-                MainActivity.mArrVehicleOperationList.add(Data);
-                MainActivity.mVehicleOperationListAdapter.notifyDataSetChanged();
+                MainFragment.mArrVehicleOperationList.add(Data);
+                MainFragment.mVehicleOperationListAdapter.notifyDataSetChanged();
             }
         }
         catch (Exception e)

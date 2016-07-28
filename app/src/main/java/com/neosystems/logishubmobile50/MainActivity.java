@@ -6,27 +6,22 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,16 +36,13 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
-import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
 import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
 import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
-import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MainActivity";
@@ -63,58 +55,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private GoogleApiClient mGoogleApiClient;
     private LoginSessionAdapter mLoginSessionDb = null;
     private LoginSessionData mLoginSessionData = null;
-    public static ArrayList<VehicleOperationData> mArrVehicleOperationList = null;
-    private ListView mlvVehiceOperation = null;
-    public static VehicleOperationListAdapter mVehicleOperationListAdapter = null;
     private CustomProgressDialog mProgressDialog;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private Menu menu;
+    private GoogleSignInOptions gso;
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String userID = intent.getExtras().getString("userID");
-        String userNickName = intent.getExtras().getString("userNickName");
+        onOpenDB();
 
-        mLoginSessionDb = new LoginSessionAdapter(this);
-        mLoginSessionDb.open();
-
-        mLoginSessionData = mLoginSessionDb.GetLoginSessionData();
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
-
-        context = MainActivity.this;
-        ivUserProfile = (ImageView)findViewById(R.id.ivUserProfile);
-        tvUserProfileName = (TextView) findViewById(R.id.tvUserProfileName);
-        tvUserProfileName.setText(userNickName + "님 환영합니다.");
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        Menu menu = navigationView.getMenu();
-
-        if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_KAKAO)) {
-            menu.findItem(R.id.googleLogOut).setVisible(false);
-        }
-        else if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_GOOGLE)) {
-            menu.findItem(R.id.kakaoLogOut).setVisible(false);
-        }
-
-        if(isConnected()) {
-            new VehicleOperationTask().execute(Define.LOGISHUBURL + Define.VEHICLEORPERATION);
-        }
-        else {
-        }
+        setLayout();
 
         /** userProfile Image Load */
         if (mLoginSessionData.GetLoginUserImageUrl() != "") {
@@ -125,11 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GeoLocationHandler.initialize();
         GeoLocationHandler.getInstance().start();
 
-        /** ListView */
-        mArrVehicleOperationList = new ArrayList<VehicleOperationData>();
-        mlvVehiceOperation = (ListView) this.findViewById(R.id.lvVehicleOperation);
-        mVehicleOperationListAdapter = new VehicleOperationListAdapter(this, R.layout.vehicleoperationlist_list, mArrVehicleOperationList);
-        mlvVehiceOperation.setAdapter(mVehicleOperationListAdapter);
+        /** Main Fragment */
+        onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN);
     }
 
     @Override
@@ -144,6 +98,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mLoginSessionDb.close();
             mLoginSessionDb = null;
         }
+    }
+
+    private void setLayout() {
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+
+        Intent intent = getIntent();
+        String userID = intent.getExtras().getString("userID");
+        String userNickName = intent.getExtras().getString("userNickName");
+
+        context = MainActivity.this;
+        ivUserProfile = (ImageView)findViewById(R.id.ivUserProfile);
+        tvUserProfileName = (TextView) findViewById(R.id.tvUserProfileName);
+        tvUserProfileName.setText(userNickName + "님 환영합니다.");
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        menu = navigationView.getMenu();
+
+        if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_KAKAO)) {
+            menu.findItem(R.id.googleLogOut).setVisible(false);
+        }
+        else if (mLoginSessionData.GetLoginType().equals(Define.LOGINTYPE_GOOGLE)) {
+            menu.findItem(R.id.kakaoLogOut).setVisible(false);
+        }
+    }
+
+    /** SQL Lite Open & Data Init */
+    private void onOpenDB() {
+        mLoginSessionDb = new LoginSessionAdapter(this);
+        mLoginSessionDb.open();
+
+        mLoginSessionData = mLoginSessionDb.GetLoginSessionData();
     }
 
     @Override
@@ -264,10 +260,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
+
         if (id == R.id.nav_camera) {
-            Toast.makeText(getApplicationContext(), "camera", Toast.LENGTH_LONG).show();
+            onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN);
         } else if (id == R.id.nav_gallery) {
-            Toast.makeText(getApplicationContext(), "gallery", Toast.LENGTH_LONG).show();
+            onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_WEB);
         } else if (id == R.id.nav_slideshow) {
             Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_manage) {
@@ -287,64 +286,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    /** List Adapter */
-    public class VehicleOperationListAdapter extends ArrayAdapter<VehicleOperationData>
-    {
-        private ArrayList<VehicleOperationData> itemList;
-        private Context context;
-        private int rowResourceId;
-
-        public VehicleOperationListAdapter(Context context, int textViewResourceId, ArrayList<VehicleOperationData> itemList)
-        {
-            super(context, textViewResourceId, itemList);
-
-            this.itemList = itemList;
-            this.context = context;
-
-            this.rowResourceId = textViewResourceId;
+    private void onFragmentMove(String FragmentType, String Title) {
+        if (FragmentType.equals(Define.FRAGMENT_TYPE_MAIN)) {
+            fragment = new MainFragment();
+        } else if (FragmentType.equals(Define.FRAGMENT_TYPE_WEB)) {
+            fragment = new WebViewFragment();
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            View v = convertView;
-
-            VehicleOperationData item = itemList.get(position);
-
-            if(item != null)
-            {
-                v = SetVehicleOperationList(context, v, this.rowResourceId, item);
-            }
-
-            return v;
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_fragment_layout, fragment);
+            ft.commit();
         }
-    }
 
-    private View SetVehicleOperationList(Context context, View v, int rowResourceId, VehicleOperationData Data)
-    {
-        LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = vi.inflate(R.layout.vehicleoperationlist_list,null);
-
-        TextView tvLon = (TextView) v.findViewById(R.id.tvLon);
-        TextView tvLat = (TextView) v.findViewById(R.id.tvLat);
-        TextView tvAddr = (TextView) v.findViewById(R.id.tvAddr);
-
-        v.setBackgroundColor(Color.rgb(247, 247, 247));
-
-        tvLon.setText(Html.fromHtml(""+ Data.GetLon() + ""));
-        tvLat.setText(Html.fromHtml(""+ Data.GetLat() + ""));
-        tvAddr.setText(Html.fromHtml(""+ Data.GetAddr() + ""));
-
-        return v;
-    }
-
-    public boolean isConnected() {
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            return true;
-        else
-            return false;
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(Title);
+        }
     }
 
     private void showProgressDialog() {

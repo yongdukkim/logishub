@@ -68,21 +68,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-        mLoginSessionDb = new LoginSessionAdapter(this);
-        mLoginSessionDb.open();
+        onOpenDB();
 
-        mLoginSessionData = mLoginSessionDb.GetLoginSessionData();
+        setLayout();
 
         hideActionBar();
-
-        Intent intent = getIntent();
-        String DeviceToken = intent.getExtras().getString("DeviceToken");
-        String PhoneNumber = intent.getExtras().getString("PhoneNumber");
-
-        //Toast.makeText(getApplicationContext(), DeviceToken + "/"  + PhoneNumber, Toast.LENGTH_LONG).show();
-
-        findViewById(R.id.textView2).setOnClickListener(this);
-        findViewById(R.id.btnGoogleLogin).setOnClickListener(this);
 
         /** Google Api Load */
         onLoadGoogleApi();
@@ -126,6 +116,25 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             mLoginSessionDb.close();
             mLoginSessionDb = null;
         }
+    }
+
+    private void setLayout() {
+        Intent intent = getIntent();
+        String DeviceToken = intent.getExtras().getString("DeviceToken");
+        String PhoneNumber = intent.getExtras().getString("PhoneNumber");
+
+        //Toast.makeText(getApplicationContext(), DeviceToken + "/"  + PhoneNumber, Toast.LENGTH_LONG).show();
+
+        findViewById(R.id.textView2).setOnClickListener(this);
+        findViewById(R.id.btnGoogleLogin).setOnClickListener(this);
+    }
+
+    /** SQL Lite Open & Data Init */
+    private void onOpenDB() {
+        mLoginSessionDb = new LoginSessionAdapter(this);
+        mLoginSessionDb.open();
+
+        mLoginSessionData = mLoginSessionDb.GetLoginSessionData();
     }
 
     @Override

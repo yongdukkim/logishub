@@ -27,4 +27,10 @@ public class Define {
     public static final String LOGINTYPE_KAKAO = "KAKAO";
     public static final String LOGINTYPE_GOOGLE = "GOOGLE";
     public static final String LOGINTYPE_FACEBOOK = "FACEBOOK";
+
+    public static final String FRAGMENT_TYPE_MAIN = "MAINFRAGMENT";
+    public static final String FRAGMENT_TYPE_WEB = "WEBFRAGMENT";
+
+    public static final String ACTION_HEADER_MAIN = "LOGISHUB";
+    public static final String ACTION_HEADER_WEB = "WEB";
 }

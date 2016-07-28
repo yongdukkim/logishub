@@ -12,10 +12,10 @@
     tools:context="com.neosystems.logishubmobile50.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <ListView
-        android:id="@+id/lvVehicleOperation"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        />
+    <FrameLayout
+        android:id="@+id/content_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 
 </RelativeLayout>
