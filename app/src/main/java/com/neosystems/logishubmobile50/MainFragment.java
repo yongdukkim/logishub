@@ -36,7 +36,7 @@ public class MainFragment extends Fragment {
 
         setLayout(mView);
 
-        new VehicleOperationTask().execute(Define.LOGISHUBURL + Define.VEHICLEORPERATION);
+        new VehicleOperationTask().execute(Define.LOGISHUB_LOGIN_USER);
 
         return mView;
     }

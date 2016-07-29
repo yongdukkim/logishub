@@ -11,6 +11,7 @@ import java.io.BufferedInputStream;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
@@ -39,19 +40,23 @@ public class VehicleOperationTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         try
         {
-            JSONArray jsonArray = new JSONArray(result);
-            MainFragment.mArrVehicleOperationList.clear();
+            if (result != "") {
+                JSONArray jsonArray = new JSONArray(result);
+                MainFragment.mArrVehicleOperationList.clear();
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                VehicleOperationData Data = new VehicleOperationData();
-                JSONObject jObject = jsonArray.getJSONObject(i);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    VehicleOperationData Data = new VehicleOperationData();
+                    JSONObject jObject = jsonArray.getJSONObject(i);
 
-                Data.SetLon(jObject.getString("lon"));
-                Data.SetLat(jObject.getString("lat"));
-                Data.SetAddr(jObject.getString("addr"));
+                    Data.SetLon(jObject.getString("ID"));
+                    Data.SetLat(jObject.getString("NAME"));
+                    Data.SetAddr(jObject.getString("MOBILEPHONE"));
 
-                MainFragment.mArrVehicleOperationList.add(Data);
-                MainFragment.mVehicleOperationListAdapter.notifyDataSetChanged();
+                    MainFragment.mArrVehicleOperationList.add(Data);
+                    MainFragment.mVehicleOperationListAdapter.notifyDataSetChanged();
+                }
+            } else {
+                Toast.makeText(MainActivity.context, "데이터가 없습니다.",Toast.LENGTH_LONG).show();
             }
         }
         catch (Exception e)

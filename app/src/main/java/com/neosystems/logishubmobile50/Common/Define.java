@@ -3,7 +3,6 @@ package com.neosystems.logishubmobile50.Common;
 public class Define {
     public static final String APP_NAME = "NEWLOGISHUB";
     public static final int SPLASHSCREEN_TIME = 3000;
-    public static final String LOGISHUBURL = "http://dev.logishub.net/restful/api/";
     public static final String VEHICLEORPERATION = "VehiclOperation";
 
     public static final String ACT_PUT_REQ_DEVICE_TOKEN = "REQ_DEVICE_TOKEN";
@@ -43,4 +42,7 @@ public class Define {
     public static final String ACTION_HEADER_WEB = "WEB";
 
     public static final String LOGISHUB_URL_INDEX = "http://m.logishub.net/index.html";
+
+    public static final String LOGISHUB_LOGIN_USER = "http://dev.logishub.net/restful/api/v1/users/";
+    public static final String LOGISHUB_LOGIN_USER2 = "https://dev.logishub.net/restful/api/v1/users/";
 }
