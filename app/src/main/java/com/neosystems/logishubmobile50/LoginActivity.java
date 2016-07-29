@@ -36,6 +36,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.kakao.auth.AuthType;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -62,9 +63,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private CustomProgressDialog mProgressDialog;
 
+    /** FaceBook */
     private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private LoginButton btnFaceBookLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,9 +155,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         };
 
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.btnFaceBookLogin);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        btnFaceBookLogin = (LoginButton) findViewById(R.id.btnFaceBookLoginE);
+        btnFaceBookLogin.setReadPermissions("email", "public_profile");
+        btnFaceBookLogin.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
@@ -172,8 +175,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        findViewById(R.id.textView2).setOnClickListener(this);
+        findViewById(R.id.btnKakaologin).setOnClickListener(this);
         findViewById(R.id.btnGoogleLogin).setOnClickListener(this);
+        findViewById(R.id.btnFaceBookLogin).setOnClickListener(this);
+        findViewById(R.id.textView2).setOnClickListener(this);
+
     }
 
     /** SQL Lite Open & Data Init */
@@ -250,6 +256,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void onGoogleLogin() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void onKakaoLogin() {
+        Session.getCurrentSession().open(AuthType.KAKAO_TALK, this);
     }
 
     private void revokeAccess() {
@@ -334,8 +344,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnKakaologin:
+                onKakaoLogin();
+                break;
             case R.id.btnGoogleLogin:
                 onGoogleLogin();
+                break;
+            case R.id.btnFaceBookLogin:
+                btnFaceBookLogin.performClick();
                 break;
             case R.id.textView2:
                 startActivity(new Intent(getApplication(), Login2Activity.class));

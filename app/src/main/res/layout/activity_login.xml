@@ -22,7 +22,7 @@
         android:textSize="@dimen/abc_action_bar_progress_bar_size" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/com_kakao_login"
+        android:id="@+id/btnKakaologin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,7 +36,7 @@
         android:id="@+id/btnGoogleLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/com_kakao_login"
+        android:layout_below="@+id/btnKakaologin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="LOGIN WITH GOOGLE"/>
@@ -45,10 +45,20 @@
         android:id="@+id/btnFaceBookLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btnGoogleLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="LOGIN WITH FACEBOOK"/>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnFaceBookLoginE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/btnGoogleLogin"
         android:layout_marginTop="20dp"
-        android:text="LOGIN WITH FACEBOOK"/>
+        android:text="LOGIN WITH FACEBOOK"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="wrap_content"
