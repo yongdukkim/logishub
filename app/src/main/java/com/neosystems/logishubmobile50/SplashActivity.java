@@ -22,8 +22,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class SplashActivity extends Activity {
-    String DeviceToken = "";
-    String PhoneNumber = "";
+    private static String mDeviceToken = "";
+    private static String mPhoneNumber = "";
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -33,12 +33,12 @@ public class SplashActivity extends Activity {
 
         //getAppKeyHash();
 
-        PhoneNumber = getPhoneNumber();
+        mPhoneNumber = getPhoneNumber();
         /**
          * FCM Token
          */
-        FirebaseMessaging.getInstance().subscribeToTopic("NewLogisHub");
-        DeviceToken = FirebaseInstanceId.getInstance().getToken();
+        FirebaseMessaging.getInstance().subscribeToTopic(Define.APP_NAME);
+        mDeviceToken = FirebaseInstanceId.getInstance().getToken();
 
         /**
          * FireBase Analytics
@@ -91,8 +91,8 @@ public class SplashActivity extends Activity {
         public void run() {
 
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            intent.putExtra("DeviceToken", DeviceToken);
-            intent.putExtra("PhoneNumber", PhoneNumber);
+            intent.putExtra(Define.ACT_PUT_REQ_DEVICE_TOKEN, mDeviceToken);
+            intent.putExtra(Define.ACT_PUT_REQ_PHONE_NUMBER, mPhoneNumber);
             startActivity(intent);
             SplashActivity.this.finish();
         }

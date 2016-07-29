@@ -55,6 +55,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private LoginSessionAdapter mLoginSessionDb = null;
     private LoginSessionData mLoginSessionData = null;
     long pressTime;
+    public static String mDeviceToken;
+    public static String mPhoneNumber;
+
+    /** Kakao */
     SessionCallback callback;
 
     /** Google+ */
@@ -128,10 +132,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void setLayout() {
         Intent intent = getIntent();
-        String DeviceToken = intent.getExtras().getString("DeviceToken");
-        String PhoneNumber = intent.getExtras().getString("PhoneNumber");
-
-        //Toast.makeText(getApplicationContext(), DeviceToken + "/"  + PhoneNumber, Toast.LENGTH_LONG).show();
+        mDeviceToken = intent.getExtras().getString(Define.ACT_PUT_REQ_DEVICE_TOKEN);
+        mPhoneNumber = intent.getExtras().getString(Define.ACT_PUT_REQ_PHONE_NUMBER);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -428,8 +430,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mLoginSessionDb.CreateLoginSessionData(mLoginSessionData);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("userID", LoginUserID);
-        intent.putExtra("userNickName", LoginUserName);
+        intent.putExtra(Define.ACT_PUT_REQ_ID, LoginUserID);
+        intent.putExtra(Define.ACT_PUT_REQ_NICK_NAME, LoginUserName);
         startActivity(intent);
         finish();
     }

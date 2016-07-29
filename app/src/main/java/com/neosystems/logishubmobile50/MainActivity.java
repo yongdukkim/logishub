@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Menu menu;
     private GoogleSignInOptions gso;
     private Fragment fragment;
+    public static String mUserID;
+    public static String mUserNickName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,13 +112,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
-        String userID = intent.getExtras().getString("userID");
-        String userNickName = intent.getExtras().getString("userNickName");
+        mUserID = intent.getExtras().getString(Define.ACT_PUT_REQ_ID);
+        mUserNickName = intent.getExtras().getString(Define.ACT_PUT_REQ_NICK_NAME);
 
         context = MainActivity.this;
         ivUserProfile = (ImageView)findViewById(R.id.ivUserProfile);
         tvUserProfileName = (TextView) findViewById(R.id.tvUserProfileName);
-        tvUserProfileName.setText(userNickName + "님 환영합니다.");
+        tvUserProfileName.setText(mUserNickName + "님 환영합니다.");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -218,15 +220,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
     private void redirectLoginActivity() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        intent.putExtra("DeviceToken", "");
-        intent.putExtra("PhoneNumber", "");
+        intent.putExtra(Define.ACT_PUT_REQ_DEVICE_TOKEN, "");
+        intent.putExtra(Define.ACT_PUT_REQ_PHONE_NUMBER, "");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         hideProgressDialog();
@@ -252,19 +252,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
