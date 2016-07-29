@@ -31,7 +31,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-        getAppKeyHash();
+        //getAppKeyHash();
 
         PhoneNumber = getPhoneNumber();
         /**
