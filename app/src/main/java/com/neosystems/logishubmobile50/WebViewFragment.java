@@ -11,6 +11,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.neosystems.logishubmobile50.Common.Define;
+
 public class WebViewFragment extends Fragment {
     public WebView mWebView;
     public View mView;
@@ -25,7 +27,7 @@ public class WebViewFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_logishubweb, container, false);
 
         Bundle extra = getArguments();
-        mUrl = extra.getString("url");
+        mUrl = extra.getString(Define.FRG_PUT_REQ_URL);
 
         setLayout(mView);
 

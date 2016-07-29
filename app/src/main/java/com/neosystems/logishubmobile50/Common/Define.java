@@ -8,10 +8,10 @@ public class Define {
 
     public static final String ACT_PUT_REQ_DEVICE_TOKEN = "REQ_DEVICE_TOKEN";
     public static final String ACT_PUT_REQ_PHONE_NUMBER = "REQ_PHONE_NUMBER";
-
     public static final String ACT_PUT_REQ_ID = "REQ_ID";
     public static final String ACT_PUT_REQ_NICK_NAME = "REQ_NICK_NAME";
 
+    public static final String FRG_PUT_REQ_URL = "REQ_URL";
 
     public static final String CUSTOMER_SERVICE_URL = "CustomerSerivceURL";
     public static final String DEVICE_ID = "DeviceId";

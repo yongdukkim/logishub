@@ -300,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (FragmentType.equals(Define.FRAGMENT_TYPE_WEB)) {
             fragment = new WebViewFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("url", url);
+            bundle.putString(Define.FRG_PUT_REQ_URL, url);
             fragment.setArguments(bundle);
         }
 
