@@ -32,11 +32,12 @@
                 android:title="Send" />
         </menu>
     </item>
+
     <item android:id="@+id/kakaoLogOut" android:title="logout">
         <menu>
             <item
                 android:id="@+id/itmKakaoLogOut"
-                android:icon="@mipmap/ic_launcher"
+                android:icon="@drawable/ic_menu_logout"
                 android:title="로그아웃"
                 />
         </menu>
@@ -45,7 +46,7 @@
         <menu>
             <item
                 android:id="@+id/itmGoogleLogOut"
-                android:icon="@drawable/common_google_signin_btn_icon_light"
+                android:icon="@drawable/ic_menu_logout"
                 android:title="로그아웃"
                 />
         </menu>
@@ -54,7 +55,7 @@
         <menu>
             <item
                 android:id="@+id/itmFaceBookLogOut"
-                android:icon="@drawable/com_facebook_button_icon_blue"
+                android:icon="@drawable/ic_menu_logout"
                 android:title="로그아웃"
                 />
         </menu>
