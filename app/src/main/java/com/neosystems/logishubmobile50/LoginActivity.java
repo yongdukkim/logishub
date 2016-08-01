@@ -181,7 +181,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.btnGoogleLogin).setOnClickListener(this);
         findViewById(R.id.btnFaceBookLogin).setOnClickListener(this);
         findViewById(R.id.textView2).setOnClickListener(this);
-
     }
 
     /** SQL Lite Open & Data Init */
