@@ -491,7 +491,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
             catch (Exception e)
             {
-                Log.d("ex", e.getLocalizedMessage());
+                //Log.d("ex", e.getLocalizedMessage());
             }
             finally {
                 if(mProgressDialog != null)
