@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -151,6 +152,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Intent intent = getIntent();
         mDeviceToken = intent.getExtras().getString(Define.ACT_PUT_REQ_DEVICE_TOKEN);
         mPhoneNumber = intent.getExtras().getString(Define.ACT_PUT_REQ_PHONE_NUMBER);
+        mPhoneNumber = getPhoneNumber();
 
         mArrUserList = new ArrayList<UserData>();
 
@@ -536,6 +538,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             inputStream.close();
             return result;
         }
+    }
+
+    public String getPhoneNumber()
+    {
+        TelephonyManager mgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        return mgr.getLine1Number();
     }
 
     @Override
