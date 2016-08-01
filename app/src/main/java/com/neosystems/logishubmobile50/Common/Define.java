@@ -42,8 +42,6 @@ public class Define {
 
     public static final String LOGISHUB_URL_INDEX = "http://m.logishub.net/index.html";
 
-    public static final String LOGISHUB_LOGIN_USER = "HTTP://DEV.LOGISHUB.NET/RESTFUL/API/V1/";
-    public static final String LOGISHUB_LOGIN_USER2 = "HTTP2://DEV.LOGISHUB.NET/RESTFUL/API/V1/";
-
-    public static final String SEARCH_USER = "USERS/";
+    public static final String LOGISHUB_DEFAULT_URL = "http://dev.logishub.net/restful/api/v1/";
+    public static final String LOGISHUB_USER = "users";
 }

@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.DATA.VehicleOperationData;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
@@ -23,6 +24,7 @@ public class MainFragment extends Fragment {
     public static ArrayList<VehicleOperationData> mArrVehicleOperationList = null;
     public static VehicleOperationListAdapter mVehicleOperationListAdapter = null;
     public ListView mlvVehicleOperation;
+    private CustomProgressDialog mProgressDialog;
 
     public MainFragment() {
 
@@ -34,7 +36,7 @@ public class MainFragment extends Fragment {
 
         setLayout(mView);
 
-        new VehicleOperationTask().execute(Define.LOGISHUB_LOGIN_USER + Define.SEARCH_USER);
+        new VehicleOperationTask().execute(Define.LOGISHUB_DEFAULT_URL + Define.LOGISHUB_USER);
 
         return mView;
     }
