@@ -449,8 +449,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mLoginSessionData.SetLoginUserPhoneNumber(mPhoneNumber);
         mLoginSessionDb.CreateLoginSessionData(mLoginSessionData);
 
-        String param = "?MobilePhone=" + mPhoneNumber;
-        new LoginTask().execute(Define.LOGISHUB_DEFAULT_URL + Define.LOGISHUB_LOGIN + param);
+        if (mPhoneNumber != "") {
+            String param = "?MobilePhone=" + mPhoneNumber;
+            new LoginTask().execute(Define.LOGISHUB_DEFAULT_URL + Define.LOGISHUB_LOGIN + param);
+        }
+        else {
+            Toast.makeText(LoginActivity.context, "핸드폰번호 정보가 없습니다.",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public class LoginTask extends AsyncTask<String, Void, String> {
