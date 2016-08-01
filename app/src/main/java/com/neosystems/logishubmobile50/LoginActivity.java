@@ -352,12 +352,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //Google Sing In
+        //Google Sign In
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         } else {
-            //kakao Sing In
+            //kakao Sign In
             if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
                 return;
             }
