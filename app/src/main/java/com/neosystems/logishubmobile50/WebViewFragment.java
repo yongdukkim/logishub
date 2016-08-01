@@ -39,12 +39,12 @@ public class WebViewFragment extends Fragment {
         mWebView.setWebViewClient(new WebViewClientClass());
         mWebView.setWebChromeClient(new WebChromeClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         mWebView.getSettings().setDomStorageEnabled(true);
         //String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
         //mWebView.getSettings().setAppCachePath(appCachePath);
         mWebView.getSettings().setAllowFileAccess(true);
-        mWebView.getSettings().setAppCacheEnabled(false);
+        mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {

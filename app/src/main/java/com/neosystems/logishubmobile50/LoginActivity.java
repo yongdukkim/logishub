@@ -452,7 +452,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mLoginSessionDb.CreateLoginSessionData(mLoginSessionData);
 
         if (mPhoneNumber != "") {
-            String param = "?MobilePhone=" + mPhoneNumber;
+            String param = "?MobilePhone=" + mPhoneNumber.replace("+82", "0");
             new LoginTask().execute(Define.LOGISHUB_DEFAULT_URL + Define.LOGISHUB_LOGIN + param);
         }
         else {
