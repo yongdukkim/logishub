@@ -7,6 +7,7 @@ public class Define {
     public static final String ACT_PUT_REQ_DEVICE_TOKEN = "REQ_DEVICE_TOKEN";
     public static final String ACT_PUT_REQ_PHONE_NUMBER = "REQ_PHONE_NUMBER";
     public static final String ACT_PUT_REQ_ID = "REQ_ID";
+    public static final String ACT_PUT_REQ_PASSWORD = "REQ_PASSWORD";
     public static final String ACT_PUT_REQ_NICK_NAME = "REQ_NICK_NAME";
 
     public static final String FRG_PUT_REQ_URL = "REQ_URL";
@@ -41,7 +42,10 @@ public class Define {
     public static final String ACTION_HEADER_WEB = "WEB";
 
     public static final String LOGISHUB_URL_INDEX = "http://m.logishub.net/index.html";
+    public static final String LOGISHUB_URL_MAIN = "http://dev.logishub.net/portal_dev2/Main.html";
 
     public static final String LOGISHUB_DEFAULT_URL = "http://dev.logishub.net/restful/api/v1/";
+
+    public static final String LOGISHUB_LOGIN = "login";
     public static final String LOGISHUB_USER = "users";
 }

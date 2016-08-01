@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment fragment;
     public static String mUserID;
     public static String mUserNickName;
+    public static String mUserPassWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GeoLocationHandler.getInstance().start();
 
         /** Main Fragment */
-        onFragmentMove(Define.FRAGMENT_TYPE_MAIN, Define.ACTION_HEADER_MAIN, null);
+        String param = "?userId=" + mUserID + "&userPassword=" + mUserPassWord;
+        onFragmentMove(Define.FRAGMENT_TYPE_WEB, Define.ACTION_HEADER_WEB, Define.LOGISHUB_URL_MAIN + param);
     }
 
     @Override
@@ -114,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
         mUserID = intent.getExtras().getString(Define.ACT_PUT_REQ_ID);
+        mUserPassWord = intent.getExtras().getString(Define.ACT_PUT_REQ_PASSWORD);
         mUserNickName = intent.getExtras().getString(Define.ACT_PUT_REQ_NICK_NAME);
 
         context = MainActivity.this;

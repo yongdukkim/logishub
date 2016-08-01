@@ -1,8 +1,10 @@
 package com.neosystems.logishubmobile50;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -48,7 +50,21 @@ import com.kakao.util.helper.log.Logger;
 import com.neosystems.logishubmobile50.Common.CustomProgressDialog;
 import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
+import com.neosystems.logishubmobile50.DATA.UserData;
 import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
+import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private LoginSessionAdapter mLoginSessionDb = null;
@@ -56,6 +72,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     long pressTime;
     public static String mDeviceToken;
     public static String mPhoneNumber;
+    public static ArrayList<UserData> mArrUserList = null;
+    public static Context context;
 
     /** Kakao */
     SessionCallback callback;
@@ -134,6 +152,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mDeviceToken = intent.getExtras().getString(Define.ACT_PUT_REQ_DEVICE_TOKEN);
         mPhoneNumber = intent.getExtras().getString(Define.ACT_PUT_REQ_PHONE_NUMBER);
 
+        mArrUserList = new ArrayList<UserData>();
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -146,7 +166,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     if (user.getPhotoUrl() != null)
                         userImageUrl = user.getPhotoUrl().toString();
 
-                    redirectMainActivity(Define.LOGINTYPE_FACEBOOK, user.getUid(), user.getDisplayName(), userImageUrl);
+                    updateDB(Define.LOGINTYPE_FACEBOOK, user.getUid(), user.getDisplayName(), userImageUrl);
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -247,7 +267,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if (acct.getPhotoUrl() != null)
                 userImageUrl = acct.getPhotoUrl().toString();
 
-            redirectMainActivity(Define.LOGINTYPE_GOOGLE, acct.getId(), acct.getDisplayName(), userImageUrl);
+            updateDB(Define.LOGINTYPE_GOOGLE, acct.getId(), acct.getDisplayName(), userImageUrl);
         } else {
 
         }
@@ -307,7 +327,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onSuccess(UserProfile userProfile) {
                 Logger.d("UserProfile : " + userProfile);
-                redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname(), userProfile.getProfileImagePath());
+                updateDB(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname(), userProfile.getProfileImagePath());
             }
         });
     }
@@ -399,7 +419,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 @Override
                 public void onSuccess(UserProfile userProfile) {
                     Log.d("UserProfile", userProfile.toString());
-                    redirectMainActivity(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname(), userProfile.getProfileImagePath());
+                    updateDB(Define.LOGINTYPE_KAKAO, Long.toString(userProfile.getId()), userProfile.getNickname(), userProfile.getProfileImagePath());
                 }
             });
         }
@@ -410,7 +430,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void redirectMainActivity(String LoginType, String LoginUserID, String LoginUserName, String LoginUserLoginUrl) {
+    private void redirectMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra(Define.ACT_PUT_REQ_ID, mArrUserList.get(0).getUserID());
+        intent.putExtra(Define.ACT_PUT_REQ_PASSWORD, mArrUserList.get(0).getUserPassWord());
+        intent.putExtra(Define.ACT_PUT_REQ_NICK_NAME, mLoginSessionData.GetLoginUserName());
+        startActivity(intent);
+        finish();
+    }
+
+    public void updateDB(String LoginType, String LoginUserID, String LoginUserName, String LoginUserLoginUrl) {
         mLoginSessionDb.DeleteLoginSessionData();
         mLoginSessionData.SetLoginType(LoginType);
         mLoginSessionData.SetLoginUserID(LoginUserID);
@@ -420,16 +449,92 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mLoginSessionData.SetLoginUserPhoneNumber(mPhoneNumber);
         mLoginSessionDb.CreateLoginSessionData(mLoginSessionData);
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra(Define.ACT_PUT_REQ_ID, LoginUserID);
-        intent.putExtra(Define.ACT_PUT_REQ_NICK_NAME, LoginUserName);
-        startActivity(intent);
-        finish();
+        String param = "?MobilePhone=" + mPhoneNumber;
+        new LoginTask().execute(Define.LOGISHUB_DEFAULT_URL + Define.LOGISHUB_LOGIN + param);
+    }
+
+    public class LoginTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            showProgressDialog();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+            return GET(urls[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try
+            {
+                if (result != "") {
+                    JSONArray jsonArray = new JSONArray(result);
+                    mArrUserList.clear();
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        UserData Data = new UserData();
+                        JSONObject jObject = jsonArray.getJSONObject(i);
+
+                        Data.setUserID(jObject.getString("ID"));
+                        Data.setUserName(jObject.getString("NAME"));
+                        Data.setUserPassWord(jObject.getString("PASSWORD"));
+
+                        mArrUserList.add(Data);
+                        redirectMainActivity();
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.context, "데이터가 없습니다.",Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.d("ex", e.getLocalizedMessage());
+            }
+            finally {
+                if(mProgressDialog != null)
+                    hideProgressDialog();
+            }
+        }
+
+        public String GET(String urlString) {
+            InputStream inputStream = null;
+            String result = "";
+            try
+            {
+                URL url = new URL(urlString);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                inputStream = new BufferedInputStream(urlConnection.getInputStream());
+
+                if(inputStream != null)
+                    result = convertInputStreamToString(inputStream);
+                else
+                    result = "Empty";
+
+            } catch (Exception e) {
+                Log.d("InputStream", e.getLocalizedMessage());
+            }
+
+            return result;
+        }
+
+        private String convertInputStreamToString(InputStream inputStream) throws IOException {
+            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+            String line = "";
+            String result = "";
+            while((line = bufferedReader.readLine()) != null)
+                result += line;
+
+            inputStream.close();
+            return result;
+        }
     }
 
     @Override
     public void onBackPressed() {
-        if(System.currentTimeMillis() - pressTime <2000) {
+        if(System.currentTimeMillis() - pressTime < 2000) {
             finishAffinity();
             return;
         }

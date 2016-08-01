@@ -44,7 +44,7 @@ public class WebViewFragment extends Fragment {
         //String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
         //mWebView.getSettings().setAppCachePath(appCachePath);
         mWebView.getSettings().setAllowFileAccess(true);
-        mWebView.getSettings().setAppCacheEnabled(true);
+        mWebView.getSettings().setAppCacheEnabled(false);
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
