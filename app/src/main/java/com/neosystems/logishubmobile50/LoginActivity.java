@@ -264,15 +264,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Session.getCurrentSession().open(AuthType.KAKAO_TALK, this);
     }
 
-    private void revokeAccess() {
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                    }
-                });
-    }
-
     /** FaceBook Login */
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
@@ -427,6 +418,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mLoginSessionData.SetLoginUserID(LoginUserID);
         mLoginSessionData.SetLoginUserName(LoginUserName);
         mLoginSessionData.SetLoginUserImageUrl(LoginUserLoginUrl);
+        mLoginSessionData.SetLoginUserDeviceToken(mDeviceToken);
+        mLoginSessionData.SetLoginUserPhoneNumber(mPhoneNumber);
         mLoginSessionDb.CreateLoginSessionData(mLoginSessionData);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

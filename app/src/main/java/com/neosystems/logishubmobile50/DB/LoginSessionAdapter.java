@@ -17,6 +17,8 @@ public class LoginSessionAdapter {
     public static final String KEY_LOGIN_USER_ID = "LoginUserID";
     public static final String KEY_LOGIN_USER_NAME = "LoginUserName";
     public static final String KEY_LOGIN_USER_IMAGE_URL = "LoginUserImageUrl";
+    public static final String KEY_LOGIN_USER_DEVICE_TOKEN = "LoginUserDeviceToken";
+    public static final String KEY_LOGIN_USER_PHONE_NUMBER = "LoginUserPhoneNumber";
     public static final String KEY_NEW_COUNT = "NewCount";
     private final String DATABASE_NAME = "LoginSession";
     private final String DATABASE_TABLE = "TB_LoginSession";
@@ -29,7 +31,9 @@ public class LoginSessionAdapter {
             "create table TB_LoginSession (LoginType text primary key ,"+
                     "LoginUserID text null," +
                     "LoginUserName text null," +
-                    "LoginUserImageUrl text null" +
+                    "LoginUserImageUrl text null, " +
+                    "LoginUserDeviceToken text null, " +
+                    "LoginUserPhoneNumber text null " +
                     ");";
 
     public LoginSessionAdapter(Context ctx)
@@ -72,7 +76,7 @@ public class LoginSessionAdapter {
         else
             arrLoginSessionData.clear();
 
-        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME, KEY_LOGIN_USER_IMAGE_URL}, null, null, null, null, null, null);
+        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME, KEY_LOGIN_USER_IMAGE_URL, KEY_LOGIN_USER_DEVICE_TOKEN, KEY_LOGIN_USER_PHONE_NUMBER}, null, null, null, null, null, null);
 
         if(cs.moveToFirst()) {
             do {
@@ -89,7 +93,7 @@ public class LoginSessionAdapter {
     {
         LoginSessionData data = new LoginSessionData();
 
-        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME, KEY_LOGIN_USER_IMAGE_URL}, null, null, null, null, null, null);
+        Cursor cs = m_Db.query(true, DATABASE_TABLE, new String[]{KEY_LOGIN_TYPE, KEY_LOGIN_USER_ID, KEY_LOGIN_USER_NAME, KEY_LOGIN_USER_IMAGE_URL, KEY_LOGIN_USER_DEVICE_TOKEN, KEY_LOGIN_USER_PHONE_NUMBER}, null, null, null, null, null, null);
 
         if(cs.moveToFirst())
         {
@@ -142,6 +146,8 @@ public class LoginSessionAdapter {
         data.SetLoginUserID(cs.getString(nPos++));
         data.SetLoginUserName(cs.getString(nPos++));
         data.SetLoginUserImageUrl(cs.getString(nPos++));
+        data.SetLoginUserDeviceToken(cs.getString(nPos++));
+        data.SetLoginUserPhoneNumber(cs.getString(nPos++));
 
         return data;
     }
@@ -154,6 +160,8 @@ public class LoginSessionAdapter {
         val.put(KEY_LOGIN_USER_ID, Data.GetLoginUserID());
         val.put(KEY_LOGIN_USER_NAME, Data.GetLoginUserName());
         val.put(KEY_LOGIN_USER_IMAGE_URL, Data.GetLoginUserImageUrl());
+        val.put(KEY_LOGIN_USER_DEVICE_TOKEN, Data.GetLoginUserDeviceToken());
+        val.put(KEY_LOGIN_USER_PHONE_NUMBER, Data.GetLoginUserPhoneNumber());
 
         return val;
     }
