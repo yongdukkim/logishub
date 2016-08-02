@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.neosystems.logishubmobile50.LoginActivity;
 import com.neosystems.logishubmobile50.MainActivity;
 import com.neosystems.logishubmobile50.R;
 
@@ -32,14 +33,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title = data.get("title");
         String msg = data.get("message");
 
-        //if (isRunningProcess(this, packageName)) {
-        //    showMessage(this, title, msg);
-        //}
-        //else {
-        //    sendNotification(title, msg);
-        //}
+        if (isRunningProcess(this, packageName)) {
+            showMessage(this, title, msg);
+        }
+        else {
+            sendNotification(title, msg);
+        }
 
-        sendNotification(title, msg);
+        //sendNotification(title, msg);
     }
 
     public static boolean isRunningProcess(Context context, String packageName) {
@@ -63,7 +64,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String title, String message) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
