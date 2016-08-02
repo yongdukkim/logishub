@@ -98,15 +98,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onResume() {
         super.onResume();
-
-        WebViewFragment.mWebView.resumeTimers();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
-        WebViewFragment.mWebView.pauseTimers();
     }
 
     @Override
