@@ -151,7 +151,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void setLayout() {
         Intent intent = getIntent();
         mDeviceToken = intent.getExtras().getString(Define.ACT_PUT_REQ_DEVICE_TOKEN);
-        mPhoneNumber = intent.getExtras().getString(Define.ACT_PUT_REQ_PHONE_NUMBER);
         mPhoneNumber = getPhoneNumber();
 
         mArrUserList = new ArrayList<UserData>();

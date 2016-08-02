@@ -32,7 +32,7 @@ public class SplashActivity extends Activity {
 
         //getAppKeyHash();
 
-        mPhoneNumber = getPhoneNumber();
+        //mPhoneNumber = getPhoneNumber();
         /**
          * FCM Token
          */
@@ -91,7 +91,6 @@ public class SplashActivity extends Activity {
 
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             intent.putExtra(Define.ACT_PUT_REQ_DEVICE_TOKEN, mDeviceToken);
-            intent.putExtra(Define.ACT_PUT_REQ_PHONE_NUMBER, mPhoneNumber);
             startActivity(intent);
             SplashActivity.this.finish();
         }
