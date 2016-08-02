@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,7 @@ import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
 import com.neosystems.logishubmobile50.DATA.UserData;
 import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
+import com.neosystems.logishubmobile50.Kakao.GlobalApplication;
 import com.neosystems.logishubmobile50.Task.VehicleOperationTask;
 
 import org.json.JSONArray;
@@ -140,6 +142,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onDestroy();
 
         Session.getCurrentSession().removeCallback(callback);
+
+        mLoginSessionDb = null;
+        mLoginSessionData = null;
+        mArrUserList = null;
+        mGoogleApiClient = null;
+        mCallbackManager = null;
+        mAuth = null;
+        mAuthListener = null;
 
         if (mLoginSessionDb != null)
         {

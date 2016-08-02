@@ -38,6 +38,7 @@ import com.neosystems.logishubmobile50.Common.Define;
 import com.neosystems.logishubmobile50.DATA.LoginSessionData;
 import com.neosystems.logishubmobile50.DB.LoginSessionAdapter;
 import com.neosystems.logishubmobile50.Geo.GeoLocationHandler;
+import com.neosystems.logishubmobile50.Kakao.GlobalApplication;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -92,6 +93,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /** Main Fragment */
         String param = "?userId=" + mUserID + "&userPassword=" + mUserPassWord;
         onFragmentMove(Define.FRAGMENT_TYPE_WEB, Define.ACTION_HEADER_WEB, Define.LOGISHUB_URL_MAIN + param);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        WebViewFragment.mWebView.resumeTimers();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        WebViewFragment.mWebView.pauseTimers();
     }
 
     @Override

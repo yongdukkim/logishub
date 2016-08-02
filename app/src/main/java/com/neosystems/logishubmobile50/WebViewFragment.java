@@ -15,12 +15,17 @@ import android.widget.Toast;
 import com.neosystems.logishubmobile50.Common.Define;
 
 public class WebViewFragment extends Fragment {
-    public WebView mWebView;
+    public static WebView mWebView;
     public View mView;
     public String mUrl;
 
     public WebViewFragment() {
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -35,10 +40,31 @@ public class WebViewFragment extends Fragment {
         return mView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mWebView.resumeTimers();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        mWebView.pauseTimers();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mWebView = null;
+    }
+
     private void setLayout(View v){
+        mWebView = (WebView) v.findViewById(R.id.webview);
         mWebView.setWebViewClient(new WebViewClientClass());
         mWebView.setWebChromeClient(new WebChromeClient());
-        mWebView = (WebView) v.findViewById(R.id.webview);
         mWebView.clearCache(true);
         mWebView.clearHistory();
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -64,6 +90,7 @@ public class WebViewFragment extends Fragment {
                 }
             }
         });
+
         mWebView.loadUrl(mUrl);
     }
 
