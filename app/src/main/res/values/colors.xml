@@ -4,11 +4,10 @@
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
     <!--<color name="colorAccent">#FF4081</color>-->
 
-    <color name="primary">#80CBC4</color>
-    <color name="primary_dark">#4DB6AC</color>
-    <color name="primary_darker">#26A69A</color>
+    <color name="primary">#04a2bc</color>
+    <color name="primary_dark">#196782</color>
+    <color name="primary_darker">#196782</color>
     <color name="accent">#FFFFFF</color>
-
     <color name="black">#000000</color>
     <color name="jet">#222222</color>
     <color name="oil">#333333</color>
@@ -17,5 +16,29 @@
     <color name="aluminum">#999999</color>
     <color name="base">#AAAAAA</color>
     <color name="iron">#CCCCCC</color>
+    <color name="lightgray">#e0e0e0</color>
+    <color name="bg_gray">#f8f8f8</color>
     <color name="white">#FFFFFF</color>
+    <color name="skyblue">#29CAEE</color>
+    <color name="orange">#FF3300</color>
+    <color name="red">#B71C1C</color>
+    <color name="magentalight">#e538bd</color>
+    <color name="magenta">#b70095</color>
+
+    <color name="login_accent">#0097a7</color>
+    <color name="login_highlight">#BBDEFB</color>
+    <color name="login_normal">#546E7A</color>
+
+    <color name="login_hint">#546E7A</color>
+    <color name="com_facebook_blue">#3b5998</color>
+
+    <!--추가한것-->
+    <color name="current">#E3F2FD</color>
+    <color name="bg_tab">#0e91af</color>
+    <color name="textcolor_title">#1e4aba</color>
+    <color name="textcolor_sub">#4969ba</color>
+    <color name="primary_light">#00BCD4</color>
+
 </resources>
+
+

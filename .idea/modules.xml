@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/LogisHubMobile5.0.iml" filepath="$PROJECT_DIR$/LogisHubMobile5.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/logishub.iml" filepath="$PROJECT_DIR$/logishub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logishub_github.iml" filepath="$PROJECT_DIR$/logishub_github.iml" />
     </modules>
   </component>
 </project>

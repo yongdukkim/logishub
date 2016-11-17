@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/bg_gray">
+
+        <ExpandableListView
+            android:id="@+id/eplv_templete_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:groupIndicator="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|clip_vertical"
+            android:text="데이터가 없습니다."
+            android:textSize="15dp"
+            android:layout_marginBottom="50dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/monsoon" />
+
+    </FrameLayout>
+
+</LinearLayout>

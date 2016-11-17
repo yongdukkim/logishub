@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TableLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="2">
+
+                <TableLayout
+                    android:id="@+id/tablelayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <!--템플릿-->
+                    <!--<TableRow>-->
+                        <!--<View-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_weight="2"-->
+                            <!--/>-->
+
+                        <!--<Button-->
+                            <!--android:text="@string/templete"-->
+                            <!--android:id="@+id/btn_templete"-->
+                            <!--android:layout_height="38dp"-->
+                            <!--android:layout_width="55dp"-->
+                            <!--android:layout_gravity="right"-->
+                            <!--android:textColor="@color/white"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:textSize="14dp"-->
+                            <!--android:layout_marginLeft="@dimen/btn_margin_left"-->
+                            <!--android:layout_marginRight="@dimen/btn_margin_right"-->
+                            <!--android:background="@drawable/selector_btn" />-->
+                    <!--</TableRow>-->
+
+                    <!--상차지-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_loading1"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_start_area"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--하차지-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_alight1"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_end_area"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--상차시간-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_loading_time"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_pickup_time_type"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+                    <TableRow>
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/btn_pickup_date"
+                            android:layout_weight="1"
+                            android:height="@dimen/select_height"
+                            android:text="@string/select_date"
+                            android:textSize="13dp"
+                            android:visibility="gone"/>
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/btn_pickup_time"
+                            android:layout_weight="1"
+                            android:height="@dimen/select_height"
+                            android:text="@string/select_time"
+                            android:textSize="13dp"
+                            android:visibility="gone"/>
+                    </TableRow>
+
+                    <!--하차시간-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_alight_time"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_delivery_time_type"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+                    <TableRow>
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/btn_delivery_date"
+                            android:layout_weight="2"
+                            android:height="@dimen/select_height"
+                            android:text="@string/select_date"
+                            android:textSize="13dp"
+                            android:visibility="gone"/>
+                    </TableRow>
+
+                    <!--차종/특장-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_model1"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+
+                        <TextView
+                            android:text="@string/select_model2"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_vehicle_ton_code_type"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_vehicle_container_type"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--운송료-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_charge"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin" />
+                    </TableRow>
+                    <TableRow>
+                        <LinearLayout
+                            android:layout_height="@dimen/select_height"
+                            android:layout_weight="1">
+                            <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="5">-->
+                            <EditText android:id="@+id/et_price"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:digits="0123456789"
+                                android:inputType="phone"
+                                android:maxLength="4"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left" />
+                            <!--</android.support.design.widget.TextInputLayout>-->
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center|fill_vertical"
+                                android:text="만"
+                                android:textSize="15dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_height="@dimen/select_height"
+                            android:layout_weight="1">
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <android.support.v7.widget.AppCompatButton
+                                android:id="@+id/btn_price_add_10"
+                                android:layout_width="53dp"
+                                android:layout_height="wrap_content"
+                                android:text="10만"
+                                android:textSize="13dp"/>
+
+                            <android.support.v7.widget.AppCompatButton
+                                android:id="@+id/btn_price_add_1"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:text="1만"
+                                android:textSize="13dp"/>
+
+                            <android.support.v7.widget.AppCompatButton
+                                android:id="@+id/btn_price_clear"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:text="정정"
+                                android:textSize="13dp"/>
+
+                        </LinearLayout>
+                    </TableRow>
+
+                    <!--게시대상-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_target"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/btn_service"
+                            android:layout_weight="2"
+                            android:height="@dimen/select_height"
+                            android:text="@string/select_coummunity"
+                            android:textSize="13dp"/>
+                    </TableRow>
+
+                    <!--추가입력열기버튼-->
+                    <TableRow>
+                        <FrameLayout
+                            android:id="@+id/fl_freightinfo_open"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/red"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:id="@+id/tv_menu_open"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:layout_gravity="center"
+                                android:text="@string/freightinfo_open"
+                                android:textSize="13dp"
+                                android:textColor="@color/red"
+                                android:padding="7dp"/>
+                        </FrameLayout>
+                    </TableRow>
+
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/tablelayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                <!--기타-->
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_company_name"
+                        android:textSize="11dp"
+                        android:layout_weight="2"
+                        android:layout_margin="@dimen/lable_margin"/>
+                </TableRow>
+                <TableRow>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:layout_weight="2">-->
+                    <EditText android:id="@+id/et_company_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="2"
+                        android:inputType="textUri"
+                        android:textSize="15dp"
+                        android:paddingLeft="@dimen/input_padding_left"
+                        android:privateImeOptions="defaultInputmode=korean;symbol=false" />
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_company_contact"
+                        android:textSize="11dp"
+                        android:layout_weight="2"
+                        android:layout_margin="@dimen/lable_margin"/>
+                </TableRow>
+                <TableRow>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:layout_weight="2">-->
+                    <EditText android:id="@+id/et_company_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="2"
+                        android:digits="0123456789"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:textSize="15dp"
+                        android:paddingLeft="@dimen/input_padding_left"/>
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_loading2"
+                        android:textSize="11dp"
+                        android:layout_weight="2"
+                        android:layout_margin="@dimen/lable_margin"/>
+                </TableRow>
+                <TableRow>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:layout_weight="2">-->
+                    <EditText android:id="@+id/et_start_area_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="2"
+                        android:inputType="textUri"
+                        android:textSize="15dp"
+                        android:paddingLeft="@dimen/input_padding_left"
+                        android:privateImeOptions="defaultInputmode=korean;symbol=false" />
+                    <!--</android.support.design.widget.TextInputLayout>-->
+
+                    </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_etc"
+                        android:textSize="11dp"
+                        android:layout_weight="2"
+                        android:layout_margin="@dimen/lable_margin"/>
+                </TableRow>
+                <TableRow>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:layout_weight="2">-->
+                    <EditText android:id="@+id/et_company_etc"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="2"
+                        android:inputType="textUri"
+                        android:textSize="15dp"
+                        android:paddingLeft="@dimen/input_padding_left"
+                        android:privateImeOptions="defaultInputmode=korean;symbol=false" />
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_loading_method"
+                        android:textSize="11dp"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/lable_margin" />
+
+                        <TextView
+                            android:text="@string/select_alight_method"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_loading_method_type"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_unloading_method_type"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_transport"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+
+                        <TextView
+                            android:text="@string/select_payment"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_delivery_type"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_payment_type"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_payload"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin" />
+
+                        <TextView
+                            android:text="@string/select_weight"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_item_kind_type"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                    <LinearLayout
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="1">
+                        <!--<android.support.design.widget.TextInputLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="5">-->
+                        <EditText android:id="@+id/et_item_weight"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:digits="0123456789"
+                            android:inputType="phone"
+                            android:maxLength="6"
+                            android:textSize="15dp"
+                            android:paddingLeft="@dimen/input_padding_left" />
+                        <!--</android.support.design.widget.TextInputLayout>-->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center|fill_vertical"
+                            android:text="톤"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_width"
+                        android:textSize="11dp"
+                        android:layout_weight="2"
+                        android:layout_margin="@dimen/lable_margin"/>
+                </TableRow>
+                <TableRow>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:layout_weight="1">-->
+                    <EditText android:id="@+id/et_item_width"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="1"
+                        android:digits="0123456789"
+                        android:inputType="phone"
+                        android:maxLength="6"
+                        android:paddingLeft="@dimen/input_padding_left"/>
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                    <Spinner
+                        android:id="@+id/sp_item_width_type"
+                        android:entries="@array/up_down"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/select_height"
+                        style="@style/Widget.AppCompat.Spinner.Underlined" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_height"
+                        android:textSize="11dp"
+                        android:layout_weight="2"
+                        android:layout_margin="@dimen/lable_margin"/>
+                </TableRow>
+                <TableRow>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:layout_weight="1">-->
+                    <EditText android:id="@+id/et_item_height"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="1"
+                        android:digits="0123456789"
+                        android:inputType="phone"
+                        android:maxLength="6"
+                        android:textSize="15dp"
+                        android:paddingLeft="@dimen/input_padding_left"/>
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                    <Spinner
+                        android:id="@+id/sp_item_height_type"
+                        android:entries="@array/up_down"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/select_height"
+                        style="@style/Widget.AppCompat.Spinner.Underlined" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="@string/select_length"
+                        android:textSize="11dp"
+                        android:layout_weight="2"
+                        android:layout_margin="@dimen/lable_margin"/>
+                </TableRow>
+                <TableRow>
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:layout_weight="1">-->
+                    <EditText android:id="@+id/et_item_length"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/select_height"
+                        android:layout_weight="1"
+                        android:digits="0123456789"
+                        android:inputType="phone"
+                        android:maxLength="6"
+                        android:textSize="15dp"
+                        android:paddingLeft="@dimen/input_padding_left"/>
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                    <Spinner
+                        android:id="@+id/sp_item_length_type"
+                        android:entries="@array/up_down"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/select_height"
+                        style="@style/Widget.AppCompat.Spinner.Underlined" />
+                </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_special"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_custom_order_type"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </GridLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/lightgray">
+
+    <Button
+        android:text="@string/action_register_freightinfo"
+        android:id="@+id/btn_register_freightinfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:background="@drawable/selector_btn"/>
+
+    </LinearLayout>
+
+</TableLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_templete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:layout_gravity="top|right"
+        android:src="@drawable/ic_template"
+        app:backgroundTint="@color/magentalight"
+        app:rippleColor="@color/magenta"/>
+
+</android.support.design.widget.CoordinatorLayout>

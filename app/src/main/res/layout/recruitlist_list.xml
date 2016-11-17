@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_padding">
+
+        <TextView
+            android:id="@+id/tv_recruit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/lable_margin"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/black"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/title_width"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                        <TextView
+                            android:drawableLeft="@drawable/ic_freight_company"
+                            android:drawablePadding="5dp"
+                            android:text="@string/recruit_company"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height" />
+
+                        <TextView
+                            android:drawableLeft="@drawable/ic_freight_date"
+                            android:drawablePadding="5dp"
+                            android:text="@string/recruit_close"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height"/>
+
+                        <TextView
+                            android:drawableLeft="@drawable/ic_freight_job"
+                            android:drawablePadding="5dp"
+                            android:text="@string/recruit_job"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height"/>
+
+                        <TextView
+                            android:drawableLeft="@drawable/ic_freight_area"
+                            android:drawablePadding="5dp"
+                            android:text="@string/recruit_area"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_recruit_company"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height" />
+
+                        <TextView
+                            android:id="@+id/tv_recruit_close"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height"/>
+
+                        <TextView
+                            android:id="@+id/tv_recruit_job"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height"/>
+
+                        <TextView
+                            android:id="@+id/tv_recruit_area"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/title_height"/>
+                </LinearLayout>
+
+        </LinearLayout>
+
+</LinearLayout>

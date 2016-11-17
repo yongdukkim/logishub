@@ -1,12 +1,779 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/lvVehicleOperation"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:rowCount="2">
+
+                <TableLayout
+                    android:id="@+id/tablelayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+
+                    <!--상차지-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_loading1"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_loading1"
+                            android:entries="@array/area1"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--하차지-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_alight1"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_alight1"
+                            android:entries="@array/area1"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--상차시간-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_loading_time"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_loading_time"
+                            android:entries="@array/loading_time"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--하차시간-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_alight_time"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_alight_time"
+                            android:entries="@array/loading_time"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--차종/특장-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_model1"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+
+                        <TextView
+                            android:text="@string/select_model2"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_model1"
+                            android:entries="@array/tonnage"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_model2"
+                            android:entries="@array/vehicletype"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--운송료-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_charge"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin" />
+                    </TableRow>
+                    <TableRow>
+                        <LinearLayout android:layout_weight="1">
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5">
+                                <EditText android:id="@+id/input_charge"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textUri"
+                                    android:textSize="15dp"
+                                    android:paddingLeft="@dimen/input_padding_left" />
+                            </android.support.design.widget.TextInputLayout>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/select_height"
+                                android:layout_weight="1"
+                                android:gravity="center|fill_vertical"
+                                android:text="만"
+                                android:textSize="15dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_weight="1">
+                            <android.support.v7.widget.AppCompatButton
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:minWidth="40dp"
+                                android:text="10만"
+                                android:textSize="13dp"/>
+
+                            <android.support.v7.widget.AppCompatButton
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:minWidth="40dp"
+                                android:text="1만"
+                                android:textSize="13dp"/>
+                            <android.support.v7.widget.AppCompatButton
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:minWidth="40dp"
+                                android:text="정정"
+                                android:textSize="13dp"/>
+                        </LinearLayout>
+                    </TableRow>
+
+                    <!--게시대상-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_target"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"
+                            android:textColor="@color/red" />
+                    </TableRow>
+                    <TableRow>
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/btn_service"
+                            android:layout_weight="2"
+                            android:height="@dimen/select_height"
+                            android:text="@string/select_coummunity"
+                            android:textSize="13dp"/>
+                    </TableRow>
+
+                    <!--추가입력열기버튼-->
+                    <TableRow>
+                        <FrameLayout
+                            android:id="@+id/btn_freightinfo_open"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/iron"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:layout_gravity="center"
+                                android:text="@string/freightinfo_open"
+                                android:textSize="13dp"
+                                android:padding="7dp"/>
+                        </FrameLayout>
+                    </TableRow>
+
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/tablelayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <!--기타-->
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_company_name"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="2">
+                            <EditText android:id="@+id/input_company_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_company_contact"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="2">
+                            <EditText android:id="@+id/input_company_contact"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_loading2"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="2">
+                            <EditText android:id="@+id/input_loding2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left"/>
+                        </android.support.design.widget.TextInputLayout>
+
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_etc"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="2">
+                            <EditText android:id="@+id/input_etc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_loading_method"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin" />
+
+                        <TextView
+                            android:text="@string/select_alight_method"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_loading_method"
+                            android:entries="@array/method"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_alight_method"
+                            android:entries="@array/method"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_transport"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+
+                        <TextView
+                            android:text="@string/select_payment"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_transport"
+                            android:entries="@array/transport"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_payment"
+                            android:entries="@array/payment"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_payload"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin" />
+
+                        <TextView
+                            android:text="@string/select_weight"
+                            android:textSize="11dp"
+                            android:layout_weight="1"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_payload"
+                            android:entries="@array/payload"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+                        <LinearLayout android:layout_weight="1">
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5">
+                                <EditText android:id="@+id/input_weight"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textUri"
+                                    android:textSize="15dp"
+                                    android:paddingLeft="@dimen/input_padding_left" />
+                            </android.support.design.widget.TextInputLayout>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/select_height"
+                                android:layout_weight="1"
+                                android:gravity="center|fill_vertical"
+                                android:text="톤"
+                                android:textSize="15dp"/>
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_width"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="1">
+                            <EditText android:id="@+id/input_width"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left"/>
+                        </android.support.design.widget.TextInputLayout>
+                        <Spinner
+                            android:id="@+id/sp_width"
+                            android:entries="@array/up_down"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_height"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="1">
+                            <EditText android:id="@+id/input_height"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left"/>
+                        </android.support.design.widget.TextInputLayout>
+                        <Spinner
+                            android:id="@+id/sp_height"
+                            android:entries="@array/up_down"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_length"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_weight="1">
+                            <EditText android:id="@+id/input_length"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:textSize="15dp"
+                                android:paddingLeft="@dimen/input_padding_left"/>
+                        </android.support.design.widget.TextInputLayout>
+                        <Spinner
+                            android:id="@+id/sp_length"
+                            android:entries="@array/up_down"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="@string/select_special"
+                            android:textSize="11dp"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/lable_margin"/>
+                    </TableRow>
+                    <TableRow>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sp_special"
+                            android:entries="@array/special"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height"
+                            style="@style/Widget.AppCompat.Spinner.Underlined" />
+                    </TableRow>
+
+                    <!--추가입력닫기버튼-->
+                    <TableRow>
+                        <FrameLayout
+                            android:id="@+id/btn_freightinfo_close"
+                            android:layout_weight="2"
+                            android:layout_height="@dimen/select_height">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/iron"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:layout_gravity="center"
+                                android:text="@string/freightinfo_close"
+                                android:textSize="13dp"
+                                android:padding="7dp"/>
+                        </FrameLayout>
+                    </TableRow>
+
+                </TableLayout>
+
+            </GridLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/current">
+
+        <Button
+            android:text="@string/action_register_freightinfo"
+            android:id="@+id/btn_register_freightinfo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:background="@drawable/selector_btn"/>
+
+    </LinearLayout>
+</TableLayout>
+
+    <!--등록현황 조회페이지-->
+    <!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:stretchColumns="1">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<TableLayout-->
+    <!--android:id="@+id/tablelayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:focusable="true"-->
+    <!--android:focusableInTouchMode="true"-->
+    <!--android:padding="12dp">-->
+
+    <!--&lt;!&ndash;등록현황&ndash;&gt;-->
+    <!--<TableRow>-->
+    <!--<Spinner-->
+    <!--android:id="@+id/sp_term1"-->
+    <!--android:entries="@array/term"-->
+    <!--android:minWidth="100dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_height="@dimen/select_height"-->
+    <!--style="@style/Widget.AppCompat.Spinner.Underlined" />-->
+
+    <!--<android.support.v7.widget.AppCompatButton-->
+    <!--android:id="@+id/btn_service"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="10/18"/>-->
+
+    <!--<TextView-->
+    <!--android:text="-"-->
+    <!--android:textSize="20dp"/>-->
+
+    <!--<android.support.v7.widget.AppCompatButton-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="10/18"/>-->
+
+    <!--<Button-->
+    <!--android:text="@string/action_inquiry_freightinfo"-->
+    <!--android:id="@+id/btn_inquiry_freightinfo1"-->
+    <!--android:layout_height="38dp"-->
+    <!--android:minWidth="55dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textSize="15dp"-->
+    <!--android:background="@drawable/selector_btn" />-->
+    <!--</TableRow>-->
+
+    <!--</TableLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="4">-->
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<FrameLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_gravity="center">-->
+
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<ListView-->
+    <!--android:id="@+id/iv_freight_list"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent" />-->
+
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center|clip_vertical"-->
+    <!--android:text="데이터가 없습니다."-->
+    <!--android:textSize="15dp"-->
+    <!--android:layout_marginBottom="50dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:visibility="gone"-->
+    <!--android:textColor="@color/monsoon" />-->
+
+    <!--</FrameLayout>-->
+
+    <!--</ScrollView>-->
+
+    <!--</LinearLayout>-->
+    <!---->
+    <!--</TableLayout>-->
+
+
+
+    <!--&lt;!&ndash;등록이력 조회페이지&ndash;&gt;-->
+    <!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:stretchColumns="1">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<TableLayout-->
+    <!--android:id="@+id/tablelayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:focusable="true"-->
+    <!--android:focusableInTouchMode="true"-->
+    <!--android:padding="12dp">-->
+
+    <!--&lt;!&ndash;등록이력&ndash;&gt;-->
+    <!--<TableRow>-->
+    <!--<Spinner-->
+    <!--android:id="@+id/sp_view_method"-->
+    <!--android:entries="@array/view_method"-->
+    <!--android:layout_weight="2"-->
+    <!--android:layout_height="@dimen/select_height"-->
+    <!--style="@style/Widget.AppCompat.Spinner.Underlined" />-->
+    <!--</TableRow>-->
+
+    <!--<TableRow>-->
+    <!--<Spinner-->
+    <!--android:id="@+id/sp_term2"-->
+    <!--android:entries="@array/term"-->
+    <!--android:layout_weight="1"-->
+    <!--android:minWidth="70dp"-->
+    <!--android:layout_height="@dimen/select_height"-->
+    <!--style="@style/Widget.AppCompat.Spinner.Underlined" />-->
+
+    <!--<LinearLayout android:layout_weight="2">-->
+    <!--<android.support.v7.widget.AppCompatButton-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:id="@+id/btn_service"-->
+    <!--android:text="10/18"/>-->
+
+    <!--<android.support.v7.widget.AppCompatButton-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="10/18"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<Button-->
+    <!--android:text="@string/action_inquiry_freightinfo"-->
+    <!--android:id="@+id/btn_inquiry_freightinfo2"-->
+    <!--android:layout_weight="1"-->
+    <!--android:minWidth="70dp"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textSize="15dp"/>-->
+    <!--</TableRow>-->
+
+    <!--<TableRow>-->
+    <!--<Spinner-->
+    <!--android:id="@+id/sp_classify_conclude"-->
+    <!--android:entries="@array/classify_conclude"-->
+    <!--android:layout_weight="1"-->
+    <!--android:minWidth="70dp"-->
+    <!--android:layout_height="@dimen/select_height"-->
+    <!--style="@style/Widget.AppCompat.Spinner.Underlined" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/editText"-->
+    <!--android:layout_height="@dimen/select_height"-->
+    <!--android:layout_weight="2"-->
+    <!--android:inputType="textUri"-->
+    <!--android:textSize="15dp"-->
+    <!--android:paddingLeft="@dimen/input_padding_left"-->
+    <!--android:hint="@string/select_company_name" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/editText2"-->
+    <!--android:layout_height="@dimen/select_height"-->
+    <!--android:layout_weight="1"-->
+    <!--android:minWidth="70dp"-->
+    <!--android:inputType="textUri"-->
+    <!--android:textSize="15dp"-->
+    <!--android:paddingLeft="@dimen/input_padding_left"-->
+    <!--android:hint="@string/select_driver" />-->
+    <!--</TableRow>-->
+
+    <!--</TableLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="4">-->
+
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--</ScrollView>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</TableLayout>-->

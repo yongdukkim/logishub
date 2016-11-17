@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="area1">
+        <item>서울 광주</item>
+        <item>광주</item>
+        <item>울산</item>
+        <item>경기 서울</item>
+        <item>강원 서울</item>
+        <item>충북</item>
+        <item>전북</item>
+        <item>전남</item>
+        <item>경북</item>
+        <item>경남</item>
+        <item>제주</item>
+    </string-array>
+
+    <string-array name="area2">
+        <item>강남구</item>
+        <item>강동구</item>
+        <item>강북구</item>
+        <item>강서구</item>
+    </string-array>
+
+    <string-array name="loading_time">
+        <item>긴급</item>
+        <item>1시간이내</item>
+        <item>2시간이내</item>
+        <item>예약</item>\
+    </string-array>
+
+    <string-array name="alight_time">
+        <item>당일착</item>
+        <item>익일착</item>
+    </string-array>
+
+    <string-array name="community_list">
+        <item>커뮤니티목록</item>
+        <item>스카이넷</item>
+        <item>스카이넷서브1가동계</item>
+        <item>스카이넷서브2가동계</item>
+    </string-array>
+
+    <string-array name="tonnage">
+        <item>1t</item>
+        <item>2t</item>
+        <item>3t</item>
+        <item>4t</item>
+        <item>5t</item>
+        <item>6t</item>
+        <item>7t</item>
+        <item>8t</item>
+        <item>9t</item>
+        <item>10t</item>
+        <item>11t</item>
+    </string-array>
+
+    <string-array name="vehicletype">
+        <item>카고</item>
+        <item>카고(광폭)</item>
+        <item>탑</item>
+        <item>세미</item>
+        <item>지게차</item>
+    </string-array>
+
+    <string-array name="date_tonnage">
+        <item>2014년</item>
+        <item>2015년</item>
+    </string-array>
+    <string-array name="member_type">
+        <item>일반</item>
+        <item>화주</item>
+        <item>포워더</item>
+        <item>운송사</item>
+        <item>운전자</item>
+        <!--<item>3PL</item>-->
+    </string-array>
+
+    <string-array name="method">
+        <item>미정</item>
+        <item>지게차</item>
+        <item>파렛트</item>
+        <item>수작업</item>
+    </string-array>
+
+    <string-array name="transport">
+        <item>편도</item>
+        <item>왕복</item>
+    </string-array>
+
+    <string-array name="payment">
+        <item>선불</item>
+        <item>착불</item>
+    </string-array>
+
+    <string-array name="payload">
+        <item>미분류</item>
+        <item>구조물</item>
+        <item>롤원단</item>
+    </string-array>
+
+    <string-array name="up_down">
+        <item>이상</item>
+        <item>이하</item>
+    </string-array>
+
+    <string-array name="special">
+        <item>적재물보험</item>
+        <item>보세등록</item>
+        <item>냉동인증</item>
+        <item>보건증</item>
+    </string-array>
+
+    <string-array name="term">
+        <item>선택</item>
+        <item>오늘</item>
+        <item>어제</item>
+        <item>최근일주일</item>
+        <item>최근한달</item>
+        <item>이번주</item>
+        <item>이번달</item>
+        <item>지난달</item>
+    </string-array>
+
+    <string-array name="term_fns">
+        <item>선택</item>
+        <item>이번주</item>
+        <item>이번달</item>
+        <item>지난달</item>
+        <item>최근3개월</item>
+        <item>이번분기</item>
+        <item>지난분기</item>
+
+    </string-array>
+
+    <string-array name="view_method">
+        <item>내역보기</item>
+        <item>업체별 합계보기</item>
+        <item>월별/업체별 합계보기</item>
+    </string-array>
+
+    <string-array name="classify_conclude">
+        <item>전체</item>
+        <item>완결</item>
+        <item>미결</item>
+    </string-array>
+
+    <string-array name="refresh">
+        <item>수동</item>
+        <item>15초</item>
+        <item>30초</item>
+        <item>60초</item>
+    </string-array>
+
+    <string-array name="order_status">
+        <item>전체</item>
+        <item>배차중</item>
+        <item>대기</item>
+        <item>확정</item>
+        <item>거절</item>
+        <item>운송중</item>
+        <item>완료</item>
+    </string-array>
+
+
+</resources>

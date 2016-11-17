@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/line_bottom">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_company"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_delivery_customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_tel"
+            android:id="@+id/tv_delivery_customer_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/textcolor_title"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_loding"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_pickup_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_alight"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_delivery_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_tonage"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_item_kind_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_truck"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_vehicle_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_ordertype"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_customer_order_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_payment"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_payment_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_waiting"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_ton_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_etc"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_waiting"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_community"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_community_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:drawableLeft="@drawable/ic_freight_ordernum"
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_trans_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="4dp">
+
+        <Button
+            android:text="@string/complete"
+            android:id="@+id/btn_complete"
+            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/selector_btn_eliminaion" />
+
+        <Button
+            android:text="@string/cancel"
+            android:id="@+id/btn_cancel"
+            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/selector_btn_cancel" />
+
+    </LinearLayout>
+
+</LinearLayout>

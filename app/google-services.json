@@ -1,39 +1,39 @@
 {
   "project_info": {
-    "project_number": "520263243853",
-    "firebase_url": "https://fir-newlogishub.firebaseio.com",
-    "project_id": "firebase-newlogishub",
-    "storage_bucket": "firebase-newlogishub.appspot.com"
+    "project_number": "601047722335",
+    "firebase_url": "https://logishub-1124.firebaseio.com",
+    "project_id": "logishub-1124",
+    "storage_bucket": "logishub-1124.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:520263243853:android:e0c924984988c245",
+        "mobilesdk_app_id": "1:601047722335:android:70efda7b199285c4",
         "android_client_info": {
-          "package_name": "com.neosystems.logishubmobile50"
+          "package_name": "com.logishub.mobile.launcher.v5"
         }
       },
       "oauth_client": [
         {
-          "client_id": "520263243853-9qmkger8qf1gs3qf4e12pblemst7692o.apps.googleusercontent.com",
+          "client_id": "601047722335-6nv6ctbnjcdjuplcfev90vfmnnk9g1fd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.neosystems.logishubmobile50",
-            "certificate_hash": "12B8DAC65F3FE200A0BC1EB6A3005BF67E1CF275"
+            "package_name": "com.logishub.mobile.launcher.v5",
+            "certificate_hash": "927A95D720210323CF2386338C88E913EF8924A9"
           }
         },
         {
-          "client_id": "520263243853-opif91ilputb7sf3m4iq85oo9mjasd90.apps.googleusercontent.com",
+          "client_id": "601047722335-7072rrnv42emd5jr8tgvafsah37vqq4v.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "520263243853-f2cb0tf5kpvomoejhfmf7af9b7eb20si.apps.googleusercontent.com",
+          "client_id": "601047722335-3naegem47uottpsauia7tepc0a0d7bo1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBdOt6-s8w6McmtQPquWcq7yfViefNXUyU"
+          "current_key": "AIzaSyCE1QHq6VH3K7KIQ9B3eamH4an_tFCESmc"
         }
       ],
       "services": {

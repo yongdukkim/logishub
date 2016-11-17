@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/et_ton_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="톤수 설정"
+            android:paddingLeft="@dimen/input_padding_left"
+            android:textSize="14dp"
+            android:editable="false"
+            android:focusable="false"
+            android:layout_marginLeft="@dimen/btn_margin_left"/>
+
+        <Spinner
+            android:id="@+id/sp_search_time_interval"
+            android:entries="@array/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="14dp"
+                android:textColor="@color/red"/>
+
+            <TextView
+                android:id="@+id/tv_time_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="14dp"
+                android:text="초"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/line_bottom">
+
+        <TextView
+            android:id="@+id/tv_community_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/input_padding_left"
+            android:layout_marginLeft="@dimen/btn_margin_left"
+            android:layout_weight="0.5"
+            android:textSize="14dp"
+            android:text="커뮤니티" />
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/sp_item_community"
+            android:layout_width="wrap_content"
+            android:layout_weight="2"
+            android:layout_height="@dimen/select_height"
+            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+        <Button
+            android:text="@string/action_inquiry_freightinfo"
+            android:id="@+id/btn_integration_search"
+            android:layout_height="38dp"
+            android:layout_width="55dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:layout_marginLeft="@dimen/btn_margin_left"
+            android:layout_marginRight="@dimen/btn_margin_right"
+            android:background="@drawable/selector_btn" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/bg_gray">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe_refresh_layout">
+
+            <ExpandableListView
+                android:id="@+id/eplv_integration_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:groupIndicator="@android:color/transparent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|clip_vertical"
+            android:text="@string/no_data"
+            android:textSize="14dp"
+            android:layout_marginBottom="@dimen/nodata_margin"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</LinearLayout>

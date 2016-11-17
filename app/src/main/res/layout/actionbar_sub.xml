@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    >
+
+    <TextView
+        android:id="@+id/tv_actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/accent" />
+
+    <!--<ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ibtnClose"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_close_round"
+        android:background="@color/primary" />-->
+
+</RelativeLayout>

@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:padding="6dp"
-    android:background="@drawable/progress_bg" >
+    android:background="@drawable/progress_bg">
 
     <!--<TextView
         android:id="@+id/textView1"
@@ -14,11 +15,19 @@
         android:text="In progress..."
         android:textSize="20sp" />-->
 
-    <ProgressBar
+    <!--<ProgressBar
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:indeterminateDrawable="@drawable/progress_image" />
+        android:indeterminateDrawable="@drawable/progress_image" />-->
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        wheel:matProg_barColor="@color/white"
+        wheel:matProg_progressIndeterminate="true" />
 
 </RelativeLayout>

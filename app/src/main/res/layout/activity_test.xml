@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@drawable/line_bottom">
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="@string/cargo_info"
+                android:textSize="14dp" />
+
+            <EditText android:id="@+id/et_cargo_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/input_padding_left"
+                android:inputType="textUri"
+                android:textSize="14dp"
+                android:editable="false"
+                android:focusable="false"
+                android:privateImeOptions="defaultInputmode=korean;symbol=false" />
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="@string/expect_time"
+                android:textSize="14dp"/>
+
+            <Spinner
+                android:id="@+id/sp_expect_time"
+                android:layout_width="92dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:entries="@array/term"
+                style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|fill_vertical"
+                android:text="후"
+                android:textSize="14dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="@string/registration"
+                android:id="@+id/btn_register_time"
+                android:layout_height="38dp"
+                android:layout_width="55dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                android:layout_marginLeft="@dimen/btn_margin_left"
+                android:layout_marginRight="@dimen/btn_margin_right"
+                android:background="@drawable/selector_btn" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/bg_gray">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe_refresh_layout">
+
+            <ExpandableListView
+                android:id="@+id/eplv_freight_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:groupIndicator="@android:color/transparent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|clip_vertical"
+            android:text="@string/no_data"
+            android:textSize="14dp"
+            android:layout_marginBottom="@dimen/nodata_margin"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</LinearLayout>

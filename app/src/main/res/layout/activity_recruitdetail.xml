@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="@dimen/activity_padding">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_recruit_title"
+                    android:layout_marginTop="@dimen/empty_top"
+                    android:layout_marginBottom="15dp"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout android:layout_width="100dp"
+                        android:layout_height="match_parent" android:orientation="vertical">
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_company"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_company"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_user"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_manager"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_tel"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_tel"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_fax"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_fax"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:orientation="vertical">
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_company"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom" />
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_manager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_tel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_fax"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout android:layout_width="100dp"
+                        android:layout_height="match_parent" android:orientation="vertical">
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_address"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_address"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:orientation="vertical">
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                      </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout android:layout_width="100dp"
+                        android:layout_height="match_parent" android:orientation="vertical">
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_date"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_close"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_job"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_job"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_area"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_area"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:drawableLeft="@drawable/ic_freight_community"
+                            android:drawablePadding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recruit_num"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:orientation="vertical">
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_close"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_job"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_area"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                        <TextView
+                            android:textColor="@color/oil"
+                            android:id="@+id/tv_recruit_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:textColor="@color/oil"
+                    android:drawableLeft="@drawable/ic_freight_detail"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recruit_detail"
+                    android:layout_marginBottom="@dimen/empty_bottom"/>
+
+                <TextView
+                    android:textColor="@color/oil"
+                    android:id="@+id/tv_recruit_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/activity_padding"
+                    android:minHeight="100dp"
+                    android:background="@drawable/shape_stroke"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/lightgray">
+
+        <Button
+            android:text="@string/action_register_recruit"
+            android:id="@+id/btn_register_recruit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:background="@drawable/selector_btn"/>
+
+    </LinearLayout>
+
+</TableLayout>
